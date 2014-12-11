@@ -26,112 +26,112 @@ public class BillMain {
     /**
      * @return the iBillNo
      */
-    public int getiBillNo() {
+    public int getBillNo() {
         return iBillNo;
     }
 
     /**
      * @param iBillNo the iBillNo to set
      */
-    public void setiBillNo(int iBillNo) {
+    public void setBillNo(int iBillNo) {
         this.iBillNo = iBillNo;
     }
 
     /**
      * @return the dtBillDate
      */
-    public Date getDtBillDate() {
+    public Date getBillDate() {
         return dtBillDate;
     }
 
     /**
      * @param dtBillDate the dtBillDate to set
      */
-    public void setDtBillDate(Date dtBillDate) {
+    public void setBillDate(Date dtBillDate) {
         this.dtBillDate = dtBillDate;
     }
 
     /**
      * @return the strName
      */
-    public String getStrName() {
+    public String getName() {
         return strName;
     }
 
     /**
      * @param strName the strName to set
      */
-    public void setStrName(String strName) {
+    public void setName(String strName) {
         this.strName = strName;
     }
 
     /**
      * @return the dMobileNumber
      */
-    public double getdMobileNumber() {
+    public double getMobileNumber() {
         return dMobileNumber;
     }
 
     /**
      * @param dMobileNumber the dMobileNumber to set
      */
-    public void setdMobileNumber(double dMobileNumber) {
+    public void setMobileNumber(double dMobileNumber) {
         this.dMobileNumber = dMobileNumber;
     }
 
     /**
      * @return the fTotalAmt
      */
-    public float getfTotalAmt() {
+    public float getTotalAmt() {
         return fTotalAmt;
     }
 
     /**
      * @param fTotalAmt the fTotalAmt to set
      */
-    public void setfTotalAmt(float fTotalAmt) {
+    public void setTotalAmt(float fTotalAmt) {
         this.fTotalAmt = fTotalAmt;
     }
 
     /**
      * @return the strBillMainCol
      */
-    public String getStrBillMainCol() {
+    public String getBillMainCol() {
         return strBillMainCol;
     }
 
     /**
      * @param strBillMainCol the strBillMainCol to set
      */
-    public void setStrBillMainCol(String strBillMainCol) {
+    public void setBillMainCol(String strBillMainCol) {
         this.strBillMainCol = strBillMainCol;
     }
 
     /**
      * @return the strCreatedBy
      */
-    public String getStrCreatedBy() {
+    public String getCreatedBy() {
         return strCreatedBy;
     }
 
     /**
      * @param strCreatedBy the strCreatedBy to set
      */
-    public void setStrCreatedBy(String strCreatedBy) {
+    public void setCreatedBy(String strCreatedBy) {
         this.strCreatedBy = strCreatedBy;
     }
 
     /**
      * @return the fReceivedAmt
      */
-    public float getfReceivedAmt() {
+    public float getReceivedAmt() {
         return fReceivedAmt;
     }
 
     /**
      * @param fReceivedAmt the fReceivedAmt to set
      */
-    public void setfReceivedAmt(float fReceivedAmt) {
+    public void setReceivedAmt(float fReceivedAmt) {
         this.fReceivedAmt = fReceivedAmt;
     }
     

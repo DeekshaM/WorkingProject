@@ -5,9 +5,12 @@
 package com.td.task;
 
 import com.td.base.data.BillDetails;
+import com.td.base.data.BillMain;
 import com.td.base.data.CustomerBillInfo;
 import com.td.base.data.TableColumnsInfo;
 import com.td.dataFactory.CustomerDataFactory;
+import static com.td.dataFactory.CustomerDataFactory.getValidUser;
+import static com.td.dataFactory.CustomerDataFactory.setBillDetails;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
@@ -20,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -33,12 +37,18 @@ public class ResearchTable extends javax.swing.JFrame {
      */
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy:hh:mm:ss aa");
     Date date = new Date();
+    List<String> lstUserDetails;
     public ResearchTable() throws ClassNotFoundException, SQLException, Exception {
         setUIFont (new javax.swing.plaf.FontUIResource("Verdana",Font.PLAIN,11));
         initComponents();
         int componentCount = pnlParent.getComponentCount();
         addDetails(componentCount + 1,5);
         lblDate.setText(dateFormat.format(date) + "");
+        lblCustomerBno.setText(String.valueOf(CustomerDataFactory.getBillNo()));
+        lstUserDetails = getValidUser("venu", "venugopal");
+        if(lstUserDetails.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "UserName or Password wrong", "LoginUser", JOptionPane.INFORMATION_MESSAGE);
+        }
 //        lblCustomerBno.setText(String.valueOf(CustomerDataFactory.getBillNumbers()+1));
     }
 
@@ -68,7 +78,7 @@ public class ResearchTable extends javax.swing.JFrame {
         btnPrint = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        tfRecivedAmt = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         pnlHeader1 = new javax.swing.JPanel();
         lblHeader = new javax.swing.JLabel();
@@ -193,9 +203,9 @@ public class ResearchTable extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tfRecivedAmt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tfRecivedAmtActionPerformed(evt);
             }
         });
 
@@ -213,7 +223,7 @@ public class ResearchTable extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addComponent(tfRecivedAmt, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTotalName)
                 .addGap(2, 2, 2)
@@ -232,7 +242,7 @@ public class ResearchTable extends javax.swing.JFrame {
                     .addComponent(lblTotalName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(4, 4, 4))
         );
 
@@ -316,33 +326,45 @@ public class ResearchTable extends javax.swing.JFrame {
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
         try {
             PrintUtilities.printComponent(pnlAll);
-                    CustomerBillInfo cd=new CustomerBillInfo();
-                    cd.setName(tfName.getText());
-                    cd.setMobileNum(tfMobileNum.getText());
-                    cd.setBillNumber(Integer.parseInt(lblCustomerBno.getText()));
-                    cd.setTotalAmt(Double.parseDouble(lblTotalAmount.getText()));
-                    Date date = dateFormat.parse(lblDate.getText());
-                    cd.setLastBillDate(date);
+//                    CustomerBillInfo cd=new CustomerBillInfo();
+//                    cd.setName(tfName.getText());
+//                    cd.setMobileNum(tfMobileNum.getText());
+//                    cd.setBillNumber(Integer.parseInt(lblCustomerBno.getText()));
+//                    cd.setTotalAmt(Double.parseDouble(lblTotalAmount.getText()));
+//                    Date date = dateFormat.parse(lblDate.getText());
+//                    cd.setLastBillDate(date);
                     List<BillDetails> lstOfTableInfo = new ArrayList<>();
                     
                     
             for (int i = 0; i < pnlParent.getComponentCount(); i++) {
                 BillDetails tableInfo = new BillDetails();
                 if (!((AddRow)pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && !((AddRow)pnlParent.getComponent(i)).tfPrice.getText().isEmpty()) {
+                    tableInfo.setBillNumber(Integer.valueOf(lblCustomerBno.getText()));
                     tableInfo.setItemName(((AddRow)pnlParent.getComponent(i)).tfName.getText());
                     tableInfo.setQuantity(Float.parseFloat(((AddRow)pnlParent.getComponent(i)).tfQuantity.getText()));
                     tableInfo.setPieceRate(Float.parseFloat(((AddRow)pnlParent.getComponent(i)).tfPrice.getText()));
                     tableInfo.setAmount(Float.parseFloat(((AddRow)pnlParent.getComponent(i)).tfAmount.getText()));                   
                     lstOfTableInfo.add(tableInfo);
                 }
-
             }
-            cd.setLstOfTableInfo(lstOfTableInfo);
-          int iResult = CustomerDataFactory.setBLOBObject(cd);
+            BillMain billDetails = new BillMain();
+            billDetails.setBillNo(Integer.valueOf(lblCustomerBno.getText()));  
+            billDetails.setBillDate(dateFormat.parse(lblDate.getText()));
+            billDetails.setName(tfName.getText());
+            billDetails.setMobileNumber(Double.valueOf(tfMobileNum.getText()));
+            billDetails.setTotalAmt(Float.valueOf(lblTotalAmount.getText()));
+            billDetails.setBillMainCol("Somthing");
+            billDetails.setCreatedBy(lstUserDetails.get(0));
+            billDetails.setReceivedAmt(Float.valueOf(tfRecivedAmt.getText()));
+            CustomerDataFactory.setBillDetails(billDetails);
+            CustomerDataFactory.setBillItems(lstOfTableInfo);
+            
+//            cd.setLstOfTableInfo(lstOfTableInfo);            
+//          int iResult = CustomerDataFactory.setBLOBObject(cd);
          
-          if(iResult > 0){
-              System.out.println("inserted successfully");
-          }
+//          if(iResult > 0){
+//              System.out.println("inserted successfully");
+//          }
         } catch (Exception ex) {
             Logger.getLogger(ResearchTable.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -396,9 +418,9 @@ public class ResearchTable extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tfMobileNumKeyTyped
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tfRecivedAmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfRecivedAmtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tfRecivedAmtActionPerformed
 
     private void addDetails(int iComp,int add ) {
         for (int i = iComp; i < iComp + add; i++) {
@@ -571,7 +593,6 @@ public class ResearchTable extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblArea;
     private javax.swing.JLabel lblBno;
     private javax.swing.JLabel lblCustomerBno;
@@ -587,5 +608,6 @@ public class ResearchTable extends javax.swing.JFrame {
     private javax.swing.JPanel pnlParent;
     private javax.swing.JTextField tfMobileNum;
     private javax.swing.JTextField tfName;
+    private javax.swing.JTextField tfRecivedAmt;
     // End of variables declaration//GEN-END:variables
 }

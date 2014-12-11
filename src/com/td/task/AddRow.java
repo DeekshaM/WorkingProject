@@ -24,7 +24,7 @@ public class AddRow extends javax.swing.JPanel {
     public AddRow() {
         initComponents();
         try {
-                File file = new File("C:\\Users\\Deeksha\\Desktop\\DictAllWords.txt");
+                File file = new File("D:\\Tomaggo\\TestProject\\WorkingProject\\src\\com\\td\\task\\DictAllWords.txt");
 //                File file = new File("F:\\All\\Tasks\\Tasks\\src\\com\\td\\task\\DictAllWords.txt");
                 Scanner scanner = new Scanner(file);
                 while (scanner.hasNext()) {
