@@ -7,6 +7,7 @@ package com.td.dataFactory;
 import com.td.base.data.BillDetails;
 import com.td.base.data.BillMain;
 import com.td.base.data.CustomerBillInfo;
+import com.td.base.data.ItemDetails;
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.sql.Connection;
@@ -92,6 +93,24 @@ public class CustomerDataFactory {
             throw e;
         }
         return iBillNo;
+    }
+    
+    public static int setItemDetails(ItemDetails itemDetails) throws ClassNotFoundException, SQLException {
+        
+        try (Connection con = ConnectionFactory.getConnection();) {
+            String strQuery = "INSERT INTO item_details VALUES (?,?,?,?,?,?,?);";
+            PreparedStatement ps = con.prepareStatement(strQuery);
+            ps.setString(1, itemDetails.getItemNumber());
+            ps.setString(2, itemDetails.getItemName());
+            ps.setFloat(3, itemDetails.getPurchasedPrice());
+            ps.setString(4, itemDetails.getPurchasedCompany());
+            ps.setFloat(5, itemDetails.getSalePrice());
+            ps.setString(6, itemDetails.getItemCode());
+            ps.setString(7, itemDetails.getItemDetail());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public static int setBLOBObject(CustomerBillInfo customerBillInfo) throws ClassNotFoundException, SQLException, Exception {

@@ -18,6 +18,7 @@ public class ItemDetails {
     private float salePrice;
     private String purchasedCompany;
     private String itemCode;
+    private String ItemDetail;
 
     /**
      * @return the itemNumber
@@ -101,6 +102,20 @@ public class ItemDetails {
      */
     public void setItemCode(String itemCode) {
         this.itemCode = itemCode;
+    }
+
+    /**
+     * @return the ItemDetail
+     */
+    public String getItemDetail() {
+        return ItemDetail;
+    }
+
+    /**
+     * @param ItemDetail the ItemDetail to set
+     */
+    public void setItemDetail(String ItemDetail) {
+        this.ItemDetail = ItemDetail;
     }
     
 }
