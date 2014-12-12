@@ -45,7 +45,7 @@ public class CustomerDataFactory {
             String strQuery = "INSERT INTO bill_main VALUES (?,?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(strQuery);
             ps.setInt(1, billDetails.getBillNo());
-            ps.setDate(2, new java.sql.Date(billDetails.getBillDate().getTime()));
+            ps.setString(2, billDetails.getBillDate());
             ps.setString(3, billDetails.getName());
             ps.setString(4, billDetails.getMobileNumber());
             ps.setFloat(5, billDetails.getTotalAmt());
@@ -58,8 +58,7 @@ public class CustomerDataFactory {
         }
     }
     
-    public static int setBillItems(List<BillDetails> lstbillItems) throws ClassNotFoundException, SQLException {
-        
+    public static int setBillItems(List<BillDetails> lstbillItems) throws ClassNotFoundException, SQLException {        
         try (Connection con = ConnectionFactory.getConnection();) {
             con.setAutoCommit(false);
             String strQuery = "INSERT INTO bill_details VALUES (?,?,?,?,?,?);";
@@ -88,7 +87,7 @@ public class CustomerDataFactory {
             PreparedStatement ps = con.prepareStatement(strQuery);
             ResultSet iResult = ps.executeQuery();
             while (iResult.next()) {
-                iBillNo = iResult.getInt("Bill_No") + 1;
+                iBillNo = iResult.getInt("Bill_No");
             }
         } catch (Exception e) {
             throw e;
@@ -126,7 +125,7 @@ public class CustomerDataFactory {
             while (iResult.next()) {
                 BillMain billMain = new BillMain();
                 billMain.setBillNo(iResult.getInt("Bill_No"));
-                billMain.setBillDate(iResult.getDate("Bill_Date"));
+                billMain.setBillDate(iResult.getString("Bill_Date"));
                 billMain.setName(iResult.getString("Name"));
                 billMain.setMobileNumber(iResult.getString("Mobile_No"));
                 billMain.setTotalAmt(iResult.getFloat("Total_Amount"));

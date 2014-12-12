@@ -6,13 +6,12 @@ package com.td.task;
 
 import com.td.base.data.BillDetails;
 import com.td.base.data.BillMain;
-import com.td.base.data.CustomerBillInfo;
-import com.td.base.data.TableColumnsInfo;
 import com.td.dataFactory.CustomerDataFactory;
 import static com.td.dataFactory.CustomerDataFactory.getValidUser;
-import static com.td.dataFactory.CustomerDataFactory.setBillDetails;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
@@ -38,15 +37,18 @@ public class ResearchTable extends javax.swing.JFrame {
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy:hh:mm:ss aa");
     Date date = new Date();
     List<String> lstUserDetails;
+
     public ResearchTable() throws ClassNotFoundException, SQLException, Exception {
-        setUIFont (new javax.swing.plaf.FontUIResource("Verdana",Font.PLAIN,11));
+        setUIFont(new javax.swing.plaf.FontUIResource("Verdana", Font.PLAIN, 11));
         initComponents();
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher(new MyDispatcher());
         int componentCount = pnlParent.getComponentCount();
-        addDetails(componentCount + 1,5);
+        addDetails(componentCount + 1, 5);
         lblDate.setText(dateFormat.format(date) + "");
-        lblCustomerBno.setText(String.valueOf(CustomerDataFactory.getBillNo()));
+        lblCustomerBno.setText(String.valueOf(CustomerDataFactory.getBillNo()+1));
         lstUserDetails = getValidUser("venu", "venugopal");
-        if(lstUserDetails.isEmpty()) {
+        if (lstUserDetails.isEmpty()) {
             JOptionPane.showMessageDialog(this, "UserName or Password wrong", "LoginUser", JOptionPane.INFORMATION_MESSAGE);
         }
 //        lblCustomerBno.setText(String.valueOf(CustomerDataFactory.getBillNumbers()+1));
@@ -79,6 +81,7 @@ public class ResearchTable extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
         tfRecivedAmt = new javax.swing.JTextField();
+        btnDone = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         pnlHeader1 = new javax.swing.JPanel();
         lblHeader = new javax.swing.JLabel();
@@ -141,7 +144,7 @@ public class ResearchTable extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(23, 23, 23))
         );
@@ -169,12 +172,14 @@ public class ResearchTable extends javax.swing.JFrame {
 
         lblTotalName.setText("Total Amount : ");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel7.setText("Signature");
 
         btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/td/task/print.png"))); // NOI18N
         btnPrint.setToolTipText("Print");
         btnPrint.setBorder(null);
         btnPrint.setContentAreaFilled(false);
+        btnPrint.setEnabled(false);
         btnPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrintActionPerformed(evt);
@@ -209,6 +214,16 @@ public class ResearchTable extends javax.swing.JFrame {
             }
         });
 
+        btnDone.setIcon(new javax.swing.ImageIcon("D:\\Tomaggo\\TestProject\\WorkingProject\\src\\com\\td\\task\\Done.png")); // NOI18N
+        btnDone.setBorder(null);
+        btnDone.setBorderPainted(false);
+        btnDone.setContentAreaFilled(false);
+        btnDone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoneActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -220,11 +235,13 @@ public class ResearchTable extends javax.swing.JFrame {
                 .addComponent(btnRemove)
                 .addGap(4, 4, 4)
                 .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(btnDone)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfRecivedAmt, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTotalName)
                 .addGap(2, 2, 2)
                 .addComponent(lblTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,16 +251,18 @@ public class ResearchTable extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblTotalAmount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPrint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRemove, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTotalName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(4, 4, 4))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDone)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblTotalAmount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPrint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRemove, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTotalName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))))
+                .addGap(2, 2, 2))
         );
 
         jPanel2.add(jPanel1, java.awt.BorderLayout.SOUTH);
@@ -269,7 +288,7 @@ public class ResearchTable extends javax.swing.JFrame {
                 .addComponent(lblHeader)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         pnlHeader1Layout.setVerticalGroup(
             pnlHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,32 +343,46 @@ public class ResearchTable extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
+        PrintUtilities.printComponent(pnlAll);
+    }//GEN-LAST:event_btnPrintActionPerformed
+
+    private void setDataInDB() {
         try {
-            PrintUtilities.printComponent(pnlAll);
-//                    CustomerBillInfo cd=new CustomerBillInfo();
-//                    cd.setName(tfName.getText());
-//                    cd.setMobileNum(tfMobileNum.getText());
-//                    cd.setBillNumber(Integer.parseInt(lblCustomerBno.getText()));
-//                    cd.setTotalAmt(Double.parseDouble(lblTotalAmount.getText()));
-//                    Date date = dateFormat.parse(lblDate.getText());
-//                    cd.setLastBillDate(date);
-                    List<BillDetails> lstOfTableInfo = new ArrayList<>();
-                    
-                    
+//            if(lblBno.getText().trim().equals(String.valueOf(CustomerDataFactory.getBillNo()))) {
+//                JOptionPane.showMessageDialog(this, "This Bill No ("+lblBno.getText()+") already exists", "Creating duplicate bill", JOptionPane.INFORMATION_MESSAGE);
+//                return;
+//            }
+            if (tfName.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please Enter Customer Name", "Customer Name Can't be blank", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            if (tfMobileNum.getText().length() < 10) {
+                JOptionPane.showMessageDialog(this, "Please Enter Customer Mobile No", "Mobile No Can't be blank", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            if(tfRecivedAmt.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please Enter Recived Amount", "Recived Amount Can't be blank", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            List<BillDetails> lstOfTableInfo = new ArrayList<>();
             for (int i = 0; i < pnlParent.getComponentCount(); i++) {
                 BillDetails tableInfo = new BillDetails();
-                if (!((AddRow)pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && !((AddRow)pnlParent.getComponent(i)).tfPrice.getText().isEmpty()) {
+                if (!((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && !((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty()) {
                     tableInfo.setBillNumber(Integer.valueOf(lblCustomerBno.getText()));
-                    tableInfo.setItemName(((AddRow)pnlParent.getComponent(i)).tfName.getText());
-                    tableInfo.setQuantity(Float.parseFloat(((AddRow)pnlParent.getComponent(i)).tfQuantity.getText()));
-                    tableInfo.setPieceRate(Float.parseFloat(((AddRow)pnlParent.getComponent(i)).tfPrice.getText()));
-                    tableInfo.setAmount(Float.parseFloat(((AddRow)pnlParent.getComponent(i)).tfAmount.getText()));                   
+                    tableInfo.setItemName(((AddRow) pnlParent.getComponent(i)).tfName.getText());
+                    tableInfo.setQuantity(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfQuantity.getText()));
+                    tableInfo.setPieceRate(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfPrice.getText()));
+                    tableInfo.setAmount(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfAmount.getText()));
                     lstOfTableInfo.add(tableInfo);
                 }
             }
+            if (lstOfTableInfo.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please Enter Item Details", "Item Details Can't be blank", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }            
             BillMain billDetails = new BillMain();
-            billDetails.setBillNo(Integer.valueOf(lblCustomerBno.getText()));  
-            billDetails.setBillDate(dateFormat.parse(lblDate.getText()));
+            billDetails.setBillNo(Integer.valueOf(lblCustomerBno.getText()));
+            billDetails.setBillDate(lblDate.getText());
             billDetails.setName(tfName.getText());
             billDetails.setMobileNumber(tfMobileNum.getText());
             billDetails.setTotalAmt(Float.valueOf(lblTotalAmount.getText()));
@@ -358,28 +391,27 @@ public class ResearchTable extends javax.swing.JFrame {
             billDetails.setReceivedAmt(Float.valueOf(tfRecivedAmt.getText()));
             CustomerDataFactory.setBillDetails(billDetails);
             CustomerDataFactory.setBillItems(lstOfTableInfo);
-            
-//            cd.setLstOfTableInfo(lstOfTableInfo);            
-//          int iResult = CustomerDataFactory.setBLOBObject(cd);
-         
-//          if(iResult > 0){
-//              System.out.println("inserted successfully");
-//          }
+            btnPrint.setEnabled(true);
+            JOptionPane.showMessageDialog(this, "Bill Successfully Inserted in DB", "Bill Inserted Successfully", JOptionPane.INFORMATION_MESSAGE);
+            btnDone.setEnabled(false);
+            btnAdd.setEnabled(false);
+            btnRemove.setEnabled(false);
         } catch (Exception ex) {
             Logger.getLogger(ResearchTable.class.getName()).log(Level.SEVERE, null, ex);
         }
-               
 
-    }//GEN-LAST:event_btnPrintActionPerformed
-
+    }
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         int iComp = pnlParent.getComponentCount();
         if (iComp < 30) {
-            addDetails(iComp + 1,1);
+            addDetails(iComp + 1, 1);
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        removeDetails();
+    }//GEN-LAST:event_btnRemoveActionPerformed
+    private void removeDetails() {
         for (int iCount = pnlParent.getComponentCount() - 1; iCount >= 5; iCount--) {
             AddRow row = ((AddRow) pnlParent.getComponent(iCount));
             if (row.tfName.getText().equals("") && row.tfQuantity.getText().equals("") && row.tfPrice.getText().equals("")) {
@@ -392,9 +424,9 @@ public class ResearchTable extends javax.swing.JFrame {
         }
         for (int i = 0; i < pnlParent.getComponentCount(); i++) {
             AddRow row = ((AddRow) pnlParent.getComponent(i));
-            row.tfNo.setText(" "+(i + 1)+" ");
+            row.tfNo.setText(" " + (i + 1) + " ");
         }
-        int componentCount = pnlParent.getComponentCount();
+//        int componentCount = pnlParent.getComponentCount();
         int iHeight = 5 * 19 + 6;
         pnlParent.setPreferredSize(new Dimension(654, pnlParent.getHeight() - iHeight));
         pnlParent.setMaximumSize(new Dimension(654, pnlParent.getHeight() - iHeight));
@@ -403,26 +435,28 @@ public class ResearchTable extends javax.swing.JFrame {
         pnlParent.repaint();
         this.validate();
         this.repaint();
-    }//GEN-LAST:event_btnRemoveActionPerformed
-
+    }
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-        System.out.println(this.getHeight());
+//        System.out.println(this.getHeight());
     }//GEN-LAST:event_formComponentResized
 
     private void tfMobileNumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfMobileNumKeyTyped
-        
-         if (!((evt.getKeyChar() >= '0' && evt.getKeyChar() <= '9') ||evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) ||tfMobileNum.getText().length()==10) 
-         {
-             evt.consume();
-         }
-        
+
+        if (!((evt.getKeyChar() >= '0' && evt.getKeyChar() <= '9') || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) || tfMobileNum.getText().length() == 10) {
+            evt.consume();
+        }
+
     }//GEN-LAST:event_tfMobileNumKeyTyped
 
     private void tfRecivedAmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfRecivedAmtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfRecivedAmtActionPerformed
 
-    private void addDetails(int iComp,int add ) {
+    private void btnDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneActionPerformed
+        setDataInDB();
+    }//GEN-LAST:event_btnDoneActionPerformed
+
+    private void addDetails(int iComp, int add) {
         for (int i = iComp; i < iComp + add; i++) {
             final AddRow row = new AddRow();
             row.tfNo.setText(" " + i + " ");
@@ -449,7 +483,7 @@ public class ResearchTable extends javax.swing.JFrame {
                             fTotalAmountValue += Float.valueOf(text);
                         }
                     }
-                    lblTotalAmount.setText(fTotalAmountValue+"");
+                    lblTotalAmount.setText(fTotalAmountValue + "");
                 }
 
                 @Override
@@ -471,12 +505,12 @@ public class ResearchTable extends javax.swing.JFrame {
             row.tfPrice.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyReleased(KeyEvent e) {
-                    float f=0.0f;
+                    float f = 0.0f;
                     if (!row.tfQuantity.getText().equals("") && !row.tfPrice.getText().equals("") && !row.tfPrice.getText().equals(".")) {
-                         f = Float.valueOf(Float.valueOf(row.tfQuantity.getText()) * Float.valueOf(row.tfPrice.getText()));
+                        f = Float.valueOf(row.tfQuantity.getText()) * Float.valueOf(row.tfPrice.getText());
                         row.tfAmount.setText(f + "");
                     } else {
-                        row.tfAmount.setText(f+"");
+                        row.tfAmount.setText(f + "");
                     }
                     float fTotalAmountValue = 0.0f;
                     for (int i = 0; i < pnlParent.getComponentCount(); i++) {
@@ -485,7 +519,7 @@ public class ResearchTable extends javax.swing.JFrame {
                             fTotalAmountValue += Float.valueOf(text);
                         }
                     }
-                    lblTotalAmount.setText(fTotalAmountValue+"");
+                    lblTotalAmount.setText(fTotalAmountValue + "");
                 }
 
                 @Override
@@ -508,7 +542,7 @@ public class ResearchTable extends javax.swing.JFrame {
     }
 
     public void setWidth(int add) {
-        int componentCount = pnlParent.getComponentCount();
+//        int componentCount = pnlParent.getComponentCount();
         System.out.println(pnlParent.getHeight());
         pnlParent.setPreferredSize(new Dimension(654, add * 16 + 5));
         pnlParent.setMaximumSize(new Dimension(654, add * 16 + 5));
@@ -563,22 +597,50 @@ public class ResearchTable extends javax.swing.JFrame {
             }
         });
     }
-    
-    private static void setUIFont(javax.swing.plaf.FontUIResource f)
-{
-    java.util.Enumeration keys = UIManager.getDefaults().keys();
-    while (keys.hasMoreElements())
-    {
-        Object key = keys.nextElement();
-        Object value = UIManager.get(key);
-        if (value instanceof javax.swing.plaf.FontUIResource)
-        {
-            UIManager.put(key, f);
+
+    private static void setUIFont(javax.swing.plaf.FontUIResource f) {
+        java.util.Enumeration keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof javax.swing.plaf.FontUIResource) {
+                UIManager.put(key, f);
+            }
         }
     }
-}
+
+    private class MyDispatcher implements KeyEventDispatcher {
+
+        @Override
+        public boolean dispatchKeyEvent(KeyEvent e) {
+            if (e.getID() == KeyEvent.KEY_PRESSED) {
+
+            } else if (e.getID() == KeyEvent.KEY_RELEASED) {
+                if (e.getKeyCode() == KeyEvent.VK_F1) {
+                    int iComp = pnlParent.getComponentCount();
+                    if (iComp < 30) {
+                        addDetails(iComp + 1, 1);
+                    }
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F2) {
+                    removeDetails();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F3) {
+                    PrintUtilities.printComponent(pnlAll);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_F4) {
+                    setDataInDB();
+                }
+            } else if (e.getID() == KeyEvent.KEY_TYPED) {
+
+            }
+            return false;
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDone;
     private javax.swing.JButton btnPrint;
     private javax.swing.JButton btnRemove;
     private javax.swing.JLabel jLabel1;
@@ -610,4 +672,5 @@ public class ResearchTable extends javax.swing.JFrame {
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfRecivedAmt;
     // End of variables declaration//GEN-END:variables
+
 }

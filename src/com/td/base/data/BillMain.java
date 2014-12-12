@@ -15,7 +15,7 @@ import java.util.Date;
 public class BillMain {
     
     private int iBillNo;
-    private Date dtBillDate;
+    private String dtBillDate;
     private String strName;
     private String dMobileNumber;
     private float fTotalAmt;
@@ -40,14 +40,14 @@ public class BillMain {
     /**
      * @return the dtBillDate
      */
-    public Date getBillDate() {
+    public String getBillDate() {
         return dtBillDate;
     }
 
     /**
      * @param dtBillDate the dtBillDate to set
      */
-    public void setBillDate(Date dtBillDate) {
+    public void setBillDate(String dtBillDate) {
         this.dtBillDate = dtBillDate;
     }
 

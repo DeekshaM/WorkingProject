@@ -86,7 +86,7 @@ public class BillDetailsTableModel extends AbstractTableModel{
                 record.setBillNo((int) value);
                 break;
              case 1:
-                record.setBillDate((Date)value);
+                record.setBillDate((String)value);
                 break;
              case 2:
                 record.setName((String)value);
