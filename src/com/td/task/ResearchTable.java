@@ -351,7 +351,7 @@ public class ResearchTable extends javax.swing.JFrame {
             billDetails.setBillNo(Integer.valueOf(lblCustomerBno.getText()));  
             billDetails.setBillDate(dateFormat.parse(lblDate.getText()));
             billDetails.setName(tfName.getText());
-            billDetails.setMobileNumber(Double.valueOf(tfMobileNum.getText()));
+            billDetails.setMobileNumber(tfMobileNum.getText());
             billDetails.setTotalAmt(Float.valueOf(lblTotalAmount.getText()));
             billDetails.setBillMainCol("Somthing");
             billDetails.setCreatedBy(lstUserDetails.get(0));

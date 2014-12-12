@@ -11,6 +11,7 @@ import com.td.base.data.ItemDetails;
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,7 +47,7 @@ public class CustomerDataFactory {
             ps.setInt(1, billDetails.getBillNo());
             ps.setDate(2, new java.sql.Date(billDetails.getBillDate().getTime()));
             ps.setString(3, billDetails.getName());
-            ps.setDouble(4, billDetails.getMobileNumber());
+            ps.setString(4, billDetails.getMobileNumber());
             ps.setFloat(5, billDetails.getTotalAmt());
             ps.setString(6, billDetails.getBillMainCol());
             ps.setString(7, billDetails.getCreatedBy());
@@ -112,6 +113,33 @@ public class CustomerDataFactory {
             throw e;
         }
     }
+    
+    public static List<BillMain> getBills(int billNo, Date billDate, String name) throws ClassNotFoundException, SQLException {
+        List<BillMain> lstBillMain = new ArrayList<>();
+        try (Connection con = ConnectionFactory.getConnection();) {
+            String strQuery = "SELECT * FROM billing.bill_main where Bill_No = ? or Bill_Date = ? or Name = ?";
+            PreparedStatement ps = con.prepareStatement(strQuery);
+            ps.setInt(1, billNo);
+            ps.setDate(2, billDate);
+            ps.setString(3, name);
+            ResultSet iResult = ps.executeQuery();
+            while (iResult.next()) {
+                BillMain billMain = new BillMain();
+                billMain.setBillNo(iResult.getInt("Bill_No"));
+                billMain.setBillDate(iResult.getDate("Bill_Date"));
+                billMain.setName(iResult.getString("Name"));
+                billMain.setMobileNumber(iResult.getString("Mobile_No"));
+                billMain.setTotalAmt(iResult.getFloat("Total_Amount"));
+                billMain.setReceivedAmt(iResult.getFloat("Recived_Amount"));
+                billMain.setCreatedBy(iResult.getString("Created_By"));
+                lstBillMain.add(billMain);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return lstBillMain;
+    }
+    
 
     public static int setBLOBObject(CustomerBillInfo customerBillInfo) throws ClassNotFoundException, SQLException, Exception {
 //        int iResult = 0;

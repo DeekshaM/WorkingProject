@@ -17,7 +17,7 @@ public class BillMain {
     private int iBillNo;
     private Date dtBillDate;
     private String strName;
-    private double dMobileNumber;
+    private String dMobileNumber;
     private float fTotalAmt;
     private String strBillMainCol;
     private String strCreatedBy;
@@ -68,14 +68,14 @@ public class BillMain {
     /**
      * @return the dMobileNumber
      */
-    public double getMobileNumber() {
+    public String getMobileNumber() {
         return dMobileNumber;
     }
 
     /**
      * @param dMobileNumber the dMobileNumber to set
      */
-    public void setMobileNumber(double dMobileNumber) {
+    public void setMobileNumber(String dMobileNumber) {
         this.dMobileNumber = dMobileNumber;
     }
 
