@@ -10,6 +10,7 @@ import com.td.dataFactory.CustomerDataFactory;
 import static com.td.dataFactory.CustomerDataFactory.getValidUser;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyAdapter;
@@ -76,12 +77,12 @@ public class ResearchTable extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblTotalAmount = new javax.swing.JLabel();
         lblTotalName = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         btnPrint = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
         tfRecivedAmt = new javax.swing.JTextField();
         btnDone = new javax.swing.JButton();
+        btnNewBill = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         pnlHeader1 = new javax.swing.JPanel();
         lblHeader = new javax.swing.JLabel();
@@ -172,11 +173,8 @@ public class ResearchTable extends javax.swing.JFrame {
 
         lblTotalName.setText("Total Amount : ");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel7.setText("Signature");
-
         btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/td/task/print.png"))); // NOI18N
-        btnPrint.setToolTipText("Print");
+        btnPrint.setToolTipText("Print Bill");
         btnPrint.setBorder(null);
         btnPrint.setContentAreaFilled(false);
         btnPrint.setEnabled(false);
@@ -188,7 +186,7 @@ public class ResearchTable extends javax.swing.JFrame {
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/td/task/add.png"))); // NOI18N
         btnAdd.setMnemonic('A');
-        btnAdd.setToolTipText("Add Rows");
+        btnAdd.setToolTipText("Add Item Row");
         btnAdd.setBorder(null);
         btnAdd.setContentAreaFilled(false);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -199,7 +197,7 @@ public class ResearchTable extends javax.swing.JFrame {
 
         btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/td/task/remove.png"))); // NOI18N
         btnRemove.setMnemonic('R');
-        btnRemove.setToolTipText("Remove Rows");
+        btnRemove.setToolTipText("Remove Item Row");
         btnRemove.setBorder(null);
         btnRemove.setContentAreaFilled(false);
         btnRemove.addActionListener(new java.awt.event.ActionListener() {
@@ -215,6 +213,7 @@ public class ResearchTable extends javax.swing.JFrame {
         });
 
         btnDone.setIcon(new javax.swing.ImageIcon("D:\\Tomaggo\\TestProject\\WorkingProject\\src\\com\\td\\task\\Done.png")); // NOI18N
+        btnDone.setToolTipText("Insert Data Into Database");
         btnDone.setBorder(null);
         btnDone.setBorderPainted(false);
         btnDone.setContentAreaFilled(false);
@@ -224,12 +223,29 @@ public class ResearchTable extends javax.swing.JFrame {
             }
         });
 
+        btnNewBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/td/task/newBill.png"))); // NOI18N
+        btnNewBill.setToolTipText("New Bill");
+        btnNewBill.setBorderPainted(false);
+        btnNewBill.setContentAreaFilled(false);
+        btnNewBill.setDoubleBuffered(true);
+        btnNewBill.setEnabled(false);
+        btnNewBill.setMaximumSize(new java.awt.Dimension(17, 17));
+        btnNewBill.setMinimumSize(new java.awt.Dimension(17, 17));
+        btnNewBill.setPreferredSize(new java.awt.Dimension(17, 17));
+        btnNewBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewBillActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
+                .addGap(26, 26, 26)
+                .addComponent(btnNewBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAdd)
                 .addGap(4, 4, 4)
                 .addComponent(btnRemove)
@@ -237,9 +253,7 @@ public class ResearchTable extends javax.swing.JFrame {
                 .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(btnDone)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTotalName)
@@ -260,8 +274,8 @@ public class ResearchTable extends javax.swing.JFrame {
                         .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTotalName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))))
+                            .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnNewBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2))
         );
 
@@ -396,8 +410,9 @@ public class ResearchTable extends javax.swing.JFrame {
             btnDone.setEnabled(false);
             btnAdd.setEnabled(false);
             btnRemove.setEnabled(false);
-        } catch (Exception ex) {
-            Logger.getLogger(ResearchTable.class.getName()).log(Level.SEVERE, null, ex);
+            btnNewBill.setEnabled(true);
+        } catch (HeadlessException | NumberFormatException | ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -456,6 +471,18 @@ public class ResearchTable extends javax.swing.JFrame {
         setDataInDB();
     }//GEN-LAST:event_btnDoneActionPerformed
 
+    private void btnNewBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewBillActionPerformed
+        try {
+            this.removeAll();
+            this.dispose();
+            new ResearchTable().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ResearchTable.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ResearchTable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnNewBillActionPerformed
+
     private void addDetails(int iComp, int add) {
         for (int i = iComp; i < iComp + add; i++) {
             final AddRow row = new AddRow();
@@ -471,7 +498,7 @@ public class ResearchTable extends javax.swing.JFrame {
                 public void keyReleased(KeyEvent e) {
                     float f = 0.0f;
                     if (!row.tfPrice.getText().equals("") && !row.tfQuantity.getText().equals("") && !row.tfQuantity.getText().equals(".")) {
-                        f = Float.valueOf(Float.valueOf(row.tfQuantity.getText()) * Float.valueOf(row.tfPrice.getText()));
+                        f = Float.valueOf(row.tfQuantity.getText()) * Float.valueOf(row.tfPrice.getText());
                         row.tfAmount.setText(f + "");
                     } else {
                         row.tfAmount.setText(f + "");
@@ -641,6 +668,7 @@ public class ResearchTable extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDone;
+    private javax.swing.JButton btnNewBill;
     private javax.swing.JButton btnPrint;
     private javax.swing.JButton btnRemove;
     private javax.swing.JLabel jLabel1;
@@ -649,7 +677,6 @@ public class ResearchTable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
