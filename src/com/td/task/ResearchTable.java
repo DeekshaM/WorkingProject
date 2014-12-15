@@ -25,6 +25,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 /**
  *
@@ -35,9 +39,10 @@ public class ResearchTable extends javax.swing.JFrame {
     /**
      * Creates new form ResearchTable
      */
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy:hh:mm:ss aa");
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     Date date = new Date();
     List<String> lstUserDetails;
+    DocumentFilter filter = new UppercaseDocumentFilter();
 
     public ResearchTable() throws ClassNotFoundException, SQLException, Exception {
         setUIFont(new javax.swing.plaf.FontUIResource("Verdana", Font.PLAIN, 11));
@@ -98,6 +103,7 @@ public class ResearchTable extends javax.swing.JFrame {
         tfMobileNum = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Customer Bill");
         setMaximumSize(new java.awt.Dimension(250, 160));
         setMinimumSize(new java.awt.Dimension(250, 160));
         setPreferredSize(new java.awt.Dimension(440, 160));
@@ -145,7 +151,7 @@ public class ResearchTable extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(23, 23, 23))
         );
@@ -243,7 +249,7 @@ public class ResearchTable extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(23, 23, 23)
                 .addComponent(btnNewBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAdd)
@@ -265,17 +271,16 @@ public class ResearchTable extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnDone)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblTotalAmount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPrint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRemove, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTotalName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnNewBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTotalAmount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPrint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRemove, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblTotalName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnNewBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(2, 2, 2))
         );
 
@@ -302,7 +307,7 @@ public class ResearchTable extends javax.swing.JFrame {
                 .addComponent(lblHeader)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlHeader1Layout.setVerticalGroup(
             pnlHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,25 +332,27 @@ public class ResearchTable extends javax.swing.JFrame {
         pnlDetails.add(lblBno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         jLabel6.setText("Date ");
-        pnlDetails.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 50, -1));
+        pnlDetails.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 50, -1));
 
         lblDate.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
         lblDate.setText("0");
-        pnlDetails.add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 124, -1));
+        pnlDetails.add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 20, 80, -1));
 
         lblCustomerBno.setText("1");
         pnlDetails.add(lblCustomerBno, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 45, -1));
-        pnlDetails.add(tfName, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 0, 140, -1));
+
+        ((AbstractDocument) tfName.getDocument()).setDocumentFilter(filter);
+        pnlDetails.add(tfName, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 0, 170, -1));
 
         lblArea.setText("Mobile No");
-        pnlDetails.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, -1, -1));
+        pnlDetails.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, -1, 20));
 
         tfMobileNum.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfMobileNumKeyTyped(evt);
             }
         });
-        pnlDetails.add(tfMobileNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 125, -1));
+        pnlDetails.add(tfMobileNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 90, -1));
 
         jPanel4.add(pnlDetails, java.awt.BorderLayout.CENTER);
 
@@ -702,3 +709,17 @@ public class ResearchTable extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 }
+
+class UppercaseDocumentFilter extends DocumentFilter {
+  public void insertString(DocumentFilter.FilterBypass fb, int offset, String text,
+      AttributeSet attr) throws BadLocationException {
+
+    fb.insertString(offset, text.toUpperCase(), attr);
+  }
+
+  public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text,
+      AttributeSet attrs) throws BadLocationException {
+
+    fb.replace(offset, length, text.toUpperCase(), attrs);
+  }
+} 

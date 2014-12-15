@@ -50,10 +50,10 @@ public class AddRow extends javax.swing.JPanel {
         popAdd = new javax.swing.JMenuItem();
         tfName = new javax.swing.JTextField();
         tfQuantity = new javax.swing.JTextField();
-        tfPrice = new javax.swing.JTextField();
         tfNo = new javax.swing.JTextField();
-        tfAmount = new javax.swing.JTextField();
         tfType = new javax.swing.JTextField();
+        tfAmount = new javax.swing.JFormattedTextField();
+        tfPrice = new javax.swing.JFormattedTextField();
 
         popAdd.setText("Add Item Name");
         popAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -86,23 +86,12 @@ public class AddRow extends javax.swing.JPanel {
             }
         });
 
-        tfPrice.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        tfPrice.setMinimumSize(new java.awt.Dimension(6, 19));
-        tfPrice.setPreferredSize(new java.awt.Dimension(2, 20));
-
         tfNo.setEditable(false);
         tfNo.setBackground(new java.awt.Color(255, 255, 255));
         tfNo.setText("1");
         tfNo.setFocusable(false);
         tfNo.setMargin(new java.awt.Insets(0, 0, 0, 0));
         tfNo.setMinimumSize(new java.awt.Dimension(6, 19));
-
-        tfAmount.setEditable(false);
-        tfAmount.setBackground(new java.awt.Color(255, 255, 255));
-        tfAmount.setFocusable(false);
-        tfAmount.setHighlighter(null);
-        tfAmount.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        tfAmount.setMinimumSize(new java.awt.Dimension(6, 19));
 
         tfType.setText("P");
         tfType.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -112,6 +101,12 @@ public class AddRow extends javax.swing.JPanel {
                 tfTypeActionPerformed(evt);
             }
         });
+
+        tfAmount.setEditable(false);
+        tfAmount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.##"))));
+
+        tfPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.##"))));
+        tfPrice.setPreferredSize(new java.awt.Dimension(69, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -127,9 +122,9 @@ public class AddRow extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(tfQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(tfAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tfAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,9 +134,9 @@ public class AddRow extends javax.swing.JPanel {
                     .addComponent(tfNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -168,10 +163,10 @@ public class AddRow extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenuItem popAdd;
     public javax.swing.JPopupMenu popUpConfiguration;
-    public javax.swing.JTextField tfAmount;
+    public javax.swing.JFormattedTextField tfAmount;
     public javax.swing.JTextField tfName;
     public javax.swing.JTextField tfNo;
-    public javax.swing.JTextField tfPrice;
+    public javax.swing.JFormattedTextField tfPrice;
     public javax.swing.JTextField tfQuantity;
     public javax.swing.JTextField tfType;
     // End of variables declaration//GEN-END:variables

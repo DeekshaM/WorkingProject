@@ -8,11 +8,14 @@ package com.td.task;
 import com.td.base.data.BillDetails;
 import com.td.base.data.BillMain;
 import com.td.dataFactory.CustomerDataFactory;
+import java.awt.print.PrinterException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 
 /**
  *
@@ -49,8 +52,20 @@ public class ViewBill extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBills = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblBillItemDetails = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lblBillNoValue = new javax.swing.JLabel();
+        lblNameVale = new javax.swing.JLabel();
+        lblDateValue = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        lblTotalAmt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,7 +101,7 @@ public class ViewBill extends javax.swing.JFrame {
                 .addComponent(tfDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,6 +137,8 @@ public class ViewBill extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
         jScrollPane2.setPreferredSize(new java.awt.Dimension(400, 402));
 
         tblBillItemDetails.setModel(new javax.swing.table.DefaultTableModel(
@@ -134,7 +151,102 @@ public class ViewBill extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblBillItemDetails);
 
-        jPanel2.add(jScrollPane2, java.awt.BorderLayout.EAST);
+        jPanel3.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jPanel4.setPreferredSize(new java.awt.Dimension(400, 40));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("Bill No");
+
+        lblName.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblName.setText("Customer Name");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("Bill Date");
+
+        lblBillNoValue.setText("jLabel4");
+
+        lblNameVale.setText("jLabel2");
+
+        lblDateValue.setText("jLabel2");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(lblBillNoValue))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(lblName)
+                        .addGap(0, 122, Short.MAX_VALUE))
+                    .addComponent(lblNameVale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(lblDateValue))
+                .addGap(86, 86, 86))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblName)
+                    .addComponent(jLabel3))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBillNoValue)
+                    .addComponent(lblNameVale)
+                    .addComponent(lblDateValue))
+                .addGap(0, 11, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(jPanel4, java.awt.BorderLayout.NORTH);
+
+        jPanel5.setPreferredSize(new java.awt.Dimension(400, 40));
+
+        jButton1.setText("Print");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Total Amount : ");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(lblTotalAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(lblTotalAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
+                .addContainerGap())
+        );
+
+        jPanel3.add(jPanel5, java.awt.BorderLayout.PAGE_END);
+
+        jPanel2.add(jPanel3, java.awt.BorderLayout.EAST);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,13 +275,33 @@ public class ViewBill extends javax.swing.JFrame {
             try {
                 BillMain billMain = billDetailsModel.getObject(tblBills.getSelectedRow());
                 List<BillDetails> lstBillDetails = CustomerDataFactory.getBillItems(billMain.getBillNo());
+                lblBillNoValue.setText(String.valueOf(billMain.getBillNo()));
+                lblNameVale.setText(billMain.getName());
+                lblDateValue.setText(billMain.getBillDate());
+                lblTotalAmt.setText(String.valueOf(billMain.getTotalAmt()));
                 BillItemDetailsTableModel billItemDetailsModel = new BillItemDetailsTableModel(lstBillDetails);
                 tblBillItemDetails.setModel(billItemDetailsModel);
+                tblBillItemDetails.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                tblBillItemDetails.getColumnModel().getColumn(0).setPreferredWidth(165);
+                tblBillItemDetails.getColumnModel().getColumn(1).setPreferredWidth(38);
+                tblBillItemDetails.getColumnModel().getColumn(2).setPreferredWidth(60);
+                tblBillItemDetails.getColumnModel().getColumn(3).setPreferredWidth(60);
+                tblBillItemDetails.getColumnModel().getColumn(4).setPreferredWidth(70);
             } catch (ClassNotFoundException | SQLException ex) {
                 ex.printStackTrace();
             }
         }
     }//GEN-LAST:event_tblBillsMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+              MessageFormat headerFormat = new MessageFormat("Page {0}");
+              MessageFormat footerFormat = new MessageFormat("- {0} -");
+              tblBillItemDetails.print(JTable.PrintMode.FIT_WIDTH, headerFormat, footerFormat);
+            } catch (PrinterException pe) {
+              System.err.println("Error printing: " + pe.getMessage());
+            }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void setTableData() {
         
@@ -196,20 +328,16 @@ public class ViewBill extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewBill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewBill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewBill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ViewBill.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
@@ -222,13 +350,25 @@ public class ViewBill extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBillNo;
+    private javax.swing.JLabel lblBillNoValue;
     private javax.swing.JLabel lblCustomerName;
     private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblDateValue;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblNameVale;
+    private javax.swing.JLabel lblTotalAmt;
     private javax.swing.JTable tblBillItemDetails;
     private javax.swing.JTable tblBills;
     private javax.swing.JTextField tfBillNo;
