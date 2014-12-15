@@ -45,8 +45,8 @@ public class ViewBill extends javax.swing.JFrame {
         lblBillNo = new javax.swing.JLabel();
         tfBillNo = new javax.swing.JTextField();
         lblDate = new javax.swing.JLabel();
-        tfDate = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
+        tfDate = new org.jdesktop.swingx.JXDatePicker();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBills = new javax.swing.JTable();
 
@@ -80,8 +80,8 @@ public class ViewBill extends javax.swing.JFrame {
                 .addComponent(tfBillNo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblDate)
-                .addGap(18, 18, 18)
-                .addComponent(tfDate, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(tfDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch)
                 .addContainerGap(117, Short.MAX_VALUE))
@@ -96,8 +96,8 @@ public class ViewBill extends javax.swing.JFrame {
                     .addComponent(lblBillNo)
                     .addComponent(tfBillNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDate)
-                    .addComponent(tfDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch))
+                    .addComponent(btnSearch)
+                    .addComponent(tfDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -135,20 +135,19 @@ public class ViewBill extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void setTableData() {
-        try {
-            int billNo = tfBillNo.getText().isEmpty() ? 0 : Integer.valueOf(tfBillNo.getText());            
-            Date billDate = null;
-            if(!tfDate.getText().isEmpty()) {
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy:hh:mm:ss aa");       
-                billDate = (Date) dateFormat.parse(tfDate.getText());            
-            }
+        
+        try {            
+            int billNo = tfBillNo.getText().isEmpty() ? 0 : Integer.valueOf(tfBillNo.getText());
+            Date billDate = null;               
             String customerName = tfCustName.getText().isEmpty() ? "" : tfCustName.getText();
             List<BillMain> lstBillMain = CustomerDataFactory.getBills(billNo, billDate, customerName);
             BillDetailsTableModel billDetailsModel = new BillDetailsTableModel(lstBillMain);
             tblBills.setModel(billDetailsModel);
-        } catch (ParseException | ClassNotFoundException | SQLException ex) {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(ViewBill.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewBill.class.getName()).log(Level.SEVERE, null, ex);
+        }   
     }
     
     /**
@@ -196,6 +195,6 @@ public class ViewBill extends javax.swing.JFrame {
     private javax.swing.JTable tblBills;
     private javax.swing.JTextField tfBillNo;
     private javax.swing.JTextField tfCustName;
-    private javax.swing.JTextField tfDate;
+    private org.jdesktop.swingx.JXDatePicker tfDate;
     // End of variables declaration//GEN-END:variables
 }

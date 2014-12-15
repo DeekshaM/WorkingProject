@@ -116,11 +116,12 @@ public class CustomerDataFactory {
     public static List<BillMain> getBills(int billNo, Date billDate, String name) throws ClassNotFoundException, SQLException {
         List<BillMain> lstBillMain = new ArrayList<>();
         try (Connection con = ConnectionFactory.getConnection();) {
-            String strQuery = "SELECT * FROM billing.bill_main where Bill_No = ? or Bill_Date = ? or Name = ?";
+            String strQuery = "SELECT * FROM billing.bill_main where Bill_No = ? or Bill_Date = ? or Name like ?";
+            String strName = "%"+name+"%";
             PreparedStatement ps = con.prepareStatement(strQuery);
             ps.setInt(1, billNo);
             ps.setDate(2, billDate);
-            ps.setString(3, name);
+            ps.setString(3, strName);
             ResultSet iResult = ps.executeQuery();
             while (iResult.next()) {
                 BillMain billMain = new BillMain();
@@ -132,6 +133,24 @@ public class CustomerDataFactory {
                 billMain.setReceivedAmt(iResult.getFloat("Recived_Amount"));
                 billMain.setCreatedBy(iResult.getString("Created_By"));
                 lstBillMain.add(billMain);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return lstBillMain;
+    }
+    
+    
+    public static List<BillMain> getBill(int billNo) throws ClassNotFoundException, SQLException {
+        List<BillMain> lstBillMain = new ArrayList<>();
+        try (Connection con = ConnectionFactory.getConnection();) {
+            String strQuery = "SELECT * FROM bill_main";
+            PreparedStatement ps = con.prepareStatement(strQuery);
+            ResultSet iResult = ps.executeQuery();
+            while (iResult.next()) {
+                System.out.println("Venugopal Manchala");
+//                lstUserDetails.add(iResult.getString("UserId"));
+//                lstUserDetails.add(iResult.getString("Password"));
             }
         } catch (Exception e) {
             throw e;
