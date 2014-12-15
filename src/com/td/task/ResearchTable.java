@@ -384,6 +384,7 @@ public class ResearchTable extends javax.swing.JFrame {
                 if (!((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && !((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty()) {
                     tableInfo.setBillNumber(Integer.valueOf(lblCustomerBno.getText()));
                     tableInfo.setItemName(((AddRow) pnlParent.getComponent(i)).tfName.getText());
+                    tableInfo.setItemType(((AddRow) pnlParent.getComponent(i)).tfType.getText());
                     tableInfo.setQuantity(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfQuantity.getText()));
                     tableInfo.setPieceRate(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfPrice.getText()));
                     tableInfo.setAmount(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfAmount.getText()));

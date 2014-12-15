@@ -80,6 +80,28 @@ public class CustomerDataFactory {
         }
     }
     
+    public static List<BillDetails> getBillItems(int billNo) throws ClassNotFoundException, SQLException {        
+        List<BillDetails> lstbillItems = new ArrayList<>();
+        try (Connection con = ConnectionFactory.getConnection();) {            
+            String strQuery = "SELECT * FROM billing.bill_details where bill_no = ?";
+            PreparedStatement ps = con.prepareStatement(strQuery);
+            ps.setInt(1, billNo);
+            ResultSet rSet = ps.executeQuery();
+            while(rSet.next()) {
+                BillDetails billDetails = new BillDetails();
+                billDetails.setItemName(rSet.getString("Item_Name"));
+                billDetails.setItemType(rSet.getString("Item_Type"));
+                billDetails.setQuantity(rSet.getFloat("Quantity"));
+                billDetails.setPieceRate(rSet.getFloat("Price_Rate"));
+                billDetails.setAmount(rSet.getFloat("Amount"));
+                lstbillItems.add(billDetails);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return lstbillItems;
+    }
+    
     public static int getBillNo() throws ClassNotFoundException, SQLException {
         int iBillNo = 0;
         try (Connection con = ConnectionFactory.getConnection();) {

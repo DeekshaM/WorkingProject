@@ -32,6 +32,10 @@ public class BillDetailsTableModel extends AbstractTableModel{
 //     public boolean isCellEditable(int row, int column) {
 //            return flase;
 //     }
+     
+     public BillMain getObject(int row) {
+         return lstbillMain.get(row);
+     }
 
      public Class getColumnClass(String column) {
          switch (column) {
@@ -118,5 +122,7 @@ public class BillDetailsTableModel extends AbstractTableModel{
      public int getColumnCount() {
          return columnNames.length;
      }
+     
+     
 
 }

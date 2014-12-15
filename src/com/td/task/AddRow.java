@@ -53,7 +53,7 @@ public class AddRow extends javax.swing.JPanel {
         tfPrice = new javax.swing.JTextField();
         tfNo = new javax.swing.JTextField();
         tfAmount = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        tfType = new javax.swing.JTextField();
 
         popAdd.setText("Add Item Name");
         popAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -104,12 +104,12 @@ public class AddRow extends javax.swing.JPanel {
         tfAmount.setMargin(new java.awt.Insets(0, 0, 0, 0));
         tfAmount.setMinimumSize(new java.awt.Dimension(6, 19));
 
-        jTextField1.setText("P");
-        jTextField1.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jTextField1.setPreferredSize(new java.awt.Dimension(8, 20));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tfType.setText("P");
+        tfType.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        tfType.setPreferredSize(new java.awt.Dimension(8, 20));
+        tfType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tfTypeActionPerformed(evt);
             }
         });
 
@@ -123,7 +123,7 @@ public class AddRow extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfType, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(tfQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -141,7 +141,7 @@ public class AddRow extends javax.swing.JPanel {
                     .addComponent(tfQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(tfType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -161,12 +161,11 @@ public class AddRow extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfQuantityActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tfTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTypeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tfTypeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField jTextField1;
     public javax.swing.JMenuItem popAdd;
     public javax.swing.JPopupMenu popUpConfiguration;
     public javax.swing.JTextField tfAmount;
@@ -174,5 +173,6 @@ public class AddRow extends javax.swing.JPanel {
     public javax.swing.JTextField tfNo;
     public javax.swing.JTextField tfPrice;
     public javax.swing.JTextField tfQuantity;
+    public javax.swing.JTextField tfType;
     // End of variables declaration//GEN-END:variables
 }
