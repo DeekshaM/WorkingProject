@@ -107,6 +107,7 @@ public class ResearchTable extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(250, 160));
         setMinimumSize(new java.awt.Dimension(250, 160));
         setPreferredSize(new java.awt.Dimension(440, 160));
+        setResizable(false);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
@@ -249,7 +250,7 @@ public class ResearchTable extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
                 .addComponent(btnNewBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAdd)
@@ -577,13 +578,11 @@ public class ResearchTable extends javax.swing.JFrame {
     }
 
     public void setWidth(int add) {
-//        int componentCount = pnlParent.getComponentCount();
-        System.out.println(pnlParent.getHeight());
         pnlParent.setPreferredSize(new Dimension(654, add * 16 + 5));
         pnlParent.setMaximumSize(new Dimension(654, add * 16 + 5));
         jPanel2.setPreferredSize(new Dimension(654, add * 16 + 5));
         jPanel2.setMaximumSize(new Dimension(654, add * 16 + 5));
-        this.setSize(this.getWidth(), this.getHeight() + add * 16 + 5);
+        this.setSize(this.getWidth(), this.getHeight() + add * 16 + 4);
         pnlParent.validate();
         pnlParent.repaint();
         this.validate();
