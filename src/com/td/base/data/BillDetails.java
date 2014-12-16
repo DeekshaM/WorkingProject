@@ -92,7 +92,7 @@ public class BillDetails {
     /**
      * @return the pieceRate
      */
-    public double getPieceRate() {
+    public float getPieceRate() {
         return pieceRate;
     }
 

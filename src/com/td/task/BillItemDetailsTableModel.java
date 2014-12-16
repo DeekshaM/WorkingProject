@@ -16,29 +16,28 @@ import javax.swing.table.AbstractTableModel;
  */
 public class BillItemDetailsTableModel extends AbstractTableModel{
 
-    protected String[] columnNames = {"Item Name", "Type", "Qty", "Price", "Amount"};
-    int i = 0;
+    protected String[] columnNames = {"No","Item Name", "Type", "Qty", "Price", "Amount"};
+    int i;
     private List<BillDetails> lstBillDetails;
     
     public BillItemDetailsTableModel(List<BillDetails> lstBillDetails) {
         this.lstBillDetails = lstBillDetails;
+        i = 1;
     }
     
     @Override
      public String getColumnName(int column) {
          return columnNames[column];
      }
-
-//     public boolean isCellEditable(int row, int column) {
-//            return flase;
-//     }
      
      public BillDetails getObject(int row) {
          return lstBillDetails.get(row);
      }
 
      public Class getColumnClass(String column) {
-         switch (column) {           
+         switch (column) {   
+             case "No":
+                 return Integer.class;
             case "Item Name":
                 return String.class;
             case "Type":
@@ -57,16 +56,18 @@ public class BillItemDetailsTableModel extends AbstractTableModel{
     @Override
      public Object getValueAt(int row, int column) {
          BillDetails record = lstBillDetails.get(row);
-         switch (column) {             
+         switch (column) { 
              case 0:
-                return record.getItemName();
+                 return i++;
              case 1:
-                return record.getItemType();
+                return record.getItemName();
              case 2:
-                 return record.getQuantity();
+                return record.getItemType();
              case 3:
-                 return record.getPieceRate();
+                 return record.getQuantity();
              case 4:
+                 return record.getPieceRate();
+             case 5:
                  return record.getAmount();                 
              default:
                 return new Object();
@@ -77,19 +78,19 @@ public class BillItemDetailsTableModel extends AbstractTableModel{
      public void setValueAt(Object value, int row, int column) {
          BillDetails record = lstBillDetails.get(row);
          switch (column) {             
-             case 0:
+             case 1:
                 record.setItemName((String)value);
                 break;
-             case 1:
+             case 2:
                 record.setItemType((String)value);
                 break;
-             case 2:
+             case 3:
                 record.setQuantity((Float)value);
                  break;
-             case 3:
+             case 4:
                  record.setPieceRate((Float)value);
                  break;
-             case 4:
+             case 5:
                  record.setAmount((Float)value);
                  break;      
              default:
