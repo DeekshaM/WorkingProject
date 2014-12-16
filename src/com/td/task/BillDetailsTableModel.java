@@ -28,10 +28,6 @@ public class BillDetailsTableModel extends AbstractTableModel{
      public String getColumnName(int column) {
          return columnNames[column];
      }
-
-//     public boolean isCellEditable(int row, int column) {
-//            return flase;
-//     }
      
      public BillMain getObject(int row) {
          return lstbillMain.get(row);

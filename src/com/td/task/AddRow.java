@@ -4,12 +4,10 @@
  */
 package com.td.task;
 
+import com.td.base.data.ItemDetails;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,16 +21,19 @@ public class AddRow extends javax.swing.JPanel {
     List<String> timesArray = new ArrayList<>();
     public AddRow() {
         initComponents();
-        try {
-                File file = new File("D:\\Tomaggo\\TestProject\\WorkingProject\\src\\com\\td\\task\\DictAllWords.txt");
-//                File file = new File("F:\\All\\Tasks\\Tasks\\src\\com\\td\\task\\DictAllWords.txt");
-                Scanner scanner = new Scanner(file);
-                while (scanner.hasNext()) {
-                    timesArray.add(scanner.next());
-                }
-            } catch (Exception e) {
-               JOptionPane.showMessageDialog(this,"AddRow_AddRow \n Exception is Occured at Loading..... a File \n"+e.getMessage());
-            }
+//        try {
+//                File file = new File("D:\\Tomaggo\\TestProject\\WorkingProject\\src\\com\\td\\task\\DictAllWords.txt");
+////                File file = new File("F:\\All\\Tasks\\Tasks\\src\\com\\td\\task\\DictAllWords.txt");
+//                Scanner scanner = new Scanner(file);
+//                while (scanner.hasNext()) {
+//                    timesArray.add(scanner.next());
+//                }
+//            } catch (Exception e) {
+//               JOptionPane.showMessageDialog(this,"AddRow_AddRow \n Exception is Occured at Loading..... a File \n"+e.getMessage());
+//            }
+        for(ItemDetails item : ResearchTable.lstItems) {
+            timesArray.add(item.getItemName()+", "+item.getItemNumber());
+        }
         AutoTextComplete atc = new AutoTextComplete(tfName);
         atc.setItems(timesArray);
     }
@@ -74,6 +75,16 @@ public class AddRow extends javax.swing.JPanel {
         tfName.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tfNameMouseClicked(evt);
+            }
+        });
+        tfName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNameActionPerformed(evt);
+            }
+        });
+        tfName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfNameKeyReleased(evt);
             }
         });
 
@@ -159,6 +170,19 @@ public class AddRow extends javax.swing.JPanel {
     private void tfTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfTypeActionPerformed
+
+    private void tfNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNameActionPerformed
+        for(ItemDetails idetail: ResearchTable.lstItems) {
+            String[] strItemName = tfName.getText().split(",");
+            if(idetail.getItemName().equals(strItemName[0])) {
+                tfPrice.setValue(idetail.getSalePrice());
+            }
+        }
+    }//GEN-LAST:event_tfNameActionPerformed
+
+    private void tfNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNameKeyReleased
+        
+    }//GEN-LAST:event_tfNameKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenuItem popAdd;

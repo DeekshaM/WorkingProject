@@ -175,7 +175,7 @@ public class ItemDetailsForm extends javax.swing.JFrame {
             itemDetails.setItemName(tfItemName.getText());
             itemDetails.setPurchasedPrice(Float.valueOf(tfPurchasedPrice.getText()));
             itemDetails.setPurchasedCompany(tfItemPurchasedShop.getText());
-            itemDetails.setSalePrice(Float.valueOf(tfItemSellPrice.getText()));
+            itemDetails.setSalePrice(Float.valueOf(tfItemSellPrice.getText().isEmpty() ? "0" : tfItemSellPrice.getText()));
             itemDetails.setItemCode(tfItemCode.getText());
             itemDetails.setItemDetail(tfItemDetail.getText());
             setItemDetails(itemDetails);

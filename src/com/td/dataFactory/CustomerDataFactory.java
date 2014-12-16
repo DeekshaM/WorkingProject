@@ -163,21 +163,27 @@ public class CustomerDataFactory {
     }
     
     
-    public static List<BillMain> getBill(int billNo) throws ClassNotFoundException, SQLException {
-        List<BillMain> lstBillMain = new ArrayList<>();
+    public static List<ItemDetails> getItems() throws ClassNotFoundException, SQLException {
+        List<ItemDetails> lstItems = new ArrayList<>();
         try (Connection con = ConnectionFactory.getConnection();) {
-            String strQuery = "SELECT * FROM bill_main";
+            String strQuery = "SELECT * FROM item_details";
             PreparedStatement ps = con.prepareStatement(strQuery);
-            ResultSet iResult = ps.executeQuery();
-            while (iResult.next()) {
-                System.out.println("Venugopal Manchala");
-//                lstUserDetails.add(iResult.getString("UserId"));
-//                lstUserDetails.add(iResult.getString("Password"));
+            ResultSet rSet = ps.executeQuery();
+            while (rSet.next()) {
+               ItemDetails itemDetails = new ItemDetails();
+               itemDetails.setItemCode(rSet.getString("Item_Code"));
+               itemDetails.setItemDetail(rSet.getString("Item_detailscol"));
+               itemDetails.setItemName(rSet.getString("Item_Name"));
+               itemDetails.setItemNumber(rSet.getString("Item_Number"));
+               itemDetails.setPurchasedCompany(rSet.getString("Item_Purchased_Company"));
+               itemDetails.setPurchasedPrice(rSet.getFloat("Purchased_Price"));
+               itemDetails.setSalePrice(rSet.getFloat("Sale_Price"));
+               lstItems.add(itemDetails);
             }
         } catch (Exception e) {
             throw e;
         }
-        return lstBillMain;
+        return lstItems;
     }
     
 

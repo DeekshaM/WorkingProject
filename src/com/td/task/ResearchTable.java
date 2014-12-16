@@ -6,6 +6,7 @@ package com.td.task;
 
 import com.td.base.data.BillDetails;
 import com.td.base.data.BillMain;
+import com.td.base.data.ItemDetails;
 import com.td.dataFactory.CustomerDataFactory;
 import static com.td.dataFactory.CustomerDataFactory.getValidUser;
 import java.awt.Dimension;
@@ -43,6 +44,7 @@ public class ResearchTable extends javax.swing.JFrame {
     Date date = new Date();
     List<String> lstUserDetails;
     DocumentFilter filter = new UppercaseDocumentFilter();
+    public static List<ItemDetails> lstItems;
 
     public ResearchTable() throws ClassNotFoundException, SQLException, Exception {
         setUIFont(new javax.swing.plaf.FontUIResource("Verdana", Font.PLAIN, 11));
@@ -50,6 +52,7 @@ public class ResearchTable extends javax.swing.JFrame {
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(new MyDispatcher());
         int componentCount = pnlParent.getComponentCount();
+        lstItems = CustomerDataFactory.getItems();
         addDetails(componentCount + 1, 5);
         lblDate.setText(dateFormat.format(date) + "");
         lblCustomerBno.setText(String.valueOf(CustomerDataFactory.getBillNo()+1));
@@ -57,7 +60,7 @@ public class ResearchTable extends javax.swing.JFrame {
         if (lstUserDetails.isEmpty()) {
             JOptionPane.showMessageDialog(this, "UserName or Password wrong", "LoginUser", JOptionPane.INFORMATION_MESSAGE);
         }
-//        lblCustomerBno.setText(String.valueOf(CustomerDataFactory.getBillNumbers()+1));
+        
     }
 
     /**
@@ -106,7 +109,7 @@ public class ResearchTable extends javax.swing.JFrame {
         setTitle("Customer Bill");
         setMaximumSize(new java.awt.Dimension(250, 160));
         setMinimumSize(new java.awt.Dimension(250, 160));
-        setPreferredSize(new java.awt.Dimension(440, 160));
+        setPreferredSize(new java.awt.Dimension(430, 140));
         setResizable(false);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
@@ -152,7 +155,7 @@ public class ResearchTable extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(23, 23, 23))
         );
@@ -264,9 +267,9 @@ public class ResearchTable extends javax.swing.JFrame {
                 .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTotalName)
-                .addGap(2, 2, 2)
+                .addGap(18, 18, 18)
                 .addComponent(lblTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,13 +277,13 @@ public class ResearchTable extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnDone)
-                    .addComponent(lblTotalAmount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPrint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRemove, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblTotalName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTotalAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btnNewBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(2, 2, 2))
         );
@@ -308,7 +311,7 @@ public class ResearchTable extends javax.swing.JFrame {
                 .addComponent(lblHeader)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         pnlHeader1Layout.setVerticalGroup(
             pnlHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,7 +453,6 @@ public class ResearchTable extends javax.swing.JFrame {
             AddRow row = ((AddRow) pnlParent.getComponent(i));
             row.tfNo.setText(" " + (i + 1) + " ");
         }
-//        int componentCount = pnlParent.getComponentCount();
         int iHeight = 5 * 19 + 6;
         pnlParent.setPreferredSize(new Dimension(654, pnlParent.getHeight() - iHeight));
         pnlParent.setMaximumSize(new Dimension(654, pnlParent.getHeight() - iHeight));
