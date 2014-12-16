@@ -12,7 +12,7 @@ package com.td.base.data;
  */
 public class ItemDetails {
     
-    private String itemNumber;
+    private int itemNumber;
     private String itemName;
     private float purchasedPrice;
     private float salePrice;
@@ -23,14 +23,14 @@ public class ItemDetails {
     /**
      * @return the itemNumber
      */
-    public String getItemNumber() {
+    public int getItemNumber() {
         return itemNumber;
     }
 
     /**
      * @param itemNumber the itemNumber to set
      */
-    public void setItemNumber(String itemNumber) {
+    public void setItemNumber(int itemNumber) {
         this.itemNumber = itemNumber;
     }
 

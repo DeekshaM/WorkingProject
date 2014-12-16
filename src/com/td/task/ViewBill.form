@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Bill Details"/>
   </Properties>
   <SyntheticProperties>
@@ -246,10 +246,12 @@
                               <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblBillNoValue" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                              <Component id="lblDateValue" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblNameVale" alignment="0" pref="23" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblBillNoValue" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                                  <Component id="lblDateValue" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                       </Group>
@@ -316,7 +318,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblTotalAmt" alignment="0" min="-2" pref="14" max="-2" attributes="0"/>
                               <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>

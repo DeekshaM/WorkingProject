@@ -122,7 +122,7 @@ public class CustomerDataFactory {
         try (Connection con = ConnectionFactory.getConnection();) {
             String strQuery = "INSERT INTO item_details VALUES (?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(strQuery);
-            ps.setString(1, itemDetails.getItemNumber());
+            ps.setInt(1, itemDetails.getItemNumber());
             ps.setString(2, itemDetails.getItemName());
             ps.setFloat(3, itemDetails.getPurchasedPrice());
             ps.setString(4, itemDetails.getPurchasedCompany());
@@ -174,7 +174,7 @@ public class CustomerDataFactory {
                itemDetails.setItemCode(rSet.getString("Item_Code"));
                itemDetails.setItemDetail(rSet.getString("Item_detailscol"));
                itemDetails.setItemName(rSet.getString("Item_Name"));
-               itemDetails.setItemNumber(rSet.getString("Item_Number"));
+               itemDetails.setItemNumber(rSet.getInt("Item_Number"));
                itemDetails.setPurchasedCompany(rSet.getString("Item_Purchased_Company"));
                itemDetails.setPurchasedPrice(rSet.getFloat("Purchased_Price"));
                itemDetails.setSalePrice(rSet.getFloat("Sale_Price"));
@@ -186,6 +186,42 @@ public class CustomerDataFactory {
         return lstItems;
     }
     
+    public static int getItemNumber() throws ClassNotFoundException, SQLException {
+        int iBillNo = 0;
+        try (Connection con = ConnectionFactory.getConnection();) {
+            String strQuery = "select Max(Item_Number) Item_Number from item_details";
+            PreparedStatement ps = con.prepareStatement(strQuery);
+            ResultSet iResult = ps.executeQuery();
+            while (iResult.next()) {
+                iBillNo = iResult.getInt("Item_Number");
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return iBillNo;
+    }
+        
+    public static ItemDetails getItemSearch(int itemNumber) throws ClassNotFoundException, SQLException {
+        ItemDetails itemDetails = new ItemDetails();
+        try (Connection con = ConnectionFactory.getConnection();) {
+            String strQuery = "SELECT * FROM billing.item_details where Item_Number = ?";
+            PreparedStatement ps = con.prepareStatement(strQuery);
+            ps.setInt(1, itemNumber);
+            ResultSet iResult = ps.executeQuery();
+            while (iResult.next()) {
+                itemDetails.setItemCode(iResult.getString("Item_Code"));
+                itemDetails.setItemDetail(iResult.getString("Item_detailscol"));
+                itemDetails.setItemName(iResult.getString("Item_Name"));
+                itemDetails.setItemNumber(iResult.getInt("Item_Number"));
+                itemDetails.setPurchasedCompany(iResult.getString("Item_Purchased_Company"));
+                itemDetails.setPurchasedPrice(iResult.getFloat("Purchased_Price"));
+                itemDetails.setSalePrice(iResult.getFloat("sale_Price"));
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return itemDetails;
+    }
 
     public static int setBLOBObject(CustomerBillInfo customerBillInfo) throws ClassNotFoundException, SQLException, Exception {
 //        int iResult = 0;
