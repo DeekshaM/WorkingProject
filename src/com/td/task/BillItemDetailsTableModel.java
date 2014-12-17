@@ -6,7 +6,6 @@
 package com.td.task;
 
 import com.td.base.data.BillDetails;
-import java.sql.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 

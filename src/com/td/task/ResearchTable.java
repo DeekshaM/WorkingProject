@@ -373,10 +373,6 @@ public class ResearchTable extends javax.swing.JFrame {
 
     private void setDataInDB() {
         try {
-//            if(lblBno.getText().trim().equals(String.valueOf(CustomerDataFactory.getBillNo()))) {
-//                JOptionPane.showMessageDialog(this, "This Bill No ("+lblBno.getText()+") already exists", "Creating duplicate bill", JOptionPane.INFORMATION_MESSAGE);
-//                return;
-//            }
             if (tfName.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please Enter Customer Name", "Customer Name Can't be blank", JOptionPane.INFORMATION_MESSAGE);
                 return;
@@ -417,6 +413,9 @@ public class ResearchTable extends javax.swing.JFrame {
             billDetails.setReceivedAmt(Float.valueOf(tfRecivedAmt.getText()));
             CustomerDataFactory.setBillDetails(billDetails);
             CustomerDataFactory.setBillItems(lstOfTableInfo);
+            if(Float.valueOf(tfRecivedAmt.getText()) > 1) {
+                CustomerDataFactory.addTransction(lblDate.getText(),lblCustomerBno.getText()+", "+ tfName.getText(), Float.valueOf(tfRecivedAmt.getText()));
+            }
             btnPrint.setEnabled(true);
             JOptionPane.showMessageDialog(this, "Bill Successfully Inserted in DB", "Bill Inserted Successfully", JOptionPane.INFORMATION_MESSAGE);
             btnDone.setEnabled(false);

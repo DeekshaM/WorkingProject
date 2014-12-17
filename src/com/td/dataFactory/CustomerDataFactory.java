@@ -6,6 +6,7 @@ package com.td.dataFactory;
 
 import com.td.base.data.BillDetails;
 import com.td.base.data.BillMain;
+import com.td.base.data.Collection;
 import com.td.base.data.CustomerBillInfo;
 import com.td.base.data.ItemDetails;
 import java.io.ByteArrayInputStream;
@@ -221,6 +222,38 @@ public class CustomerDataFactory {
             throw e;
         }
         return itemDetails;
+    }
+    
+    public static int addTransction(String dtDate, String strInformation, float fAmount) throws ClassNotFoundException, SQLException {
+        try (Connection con = ConnectionFactory.getConnection();) {
+            String strQuery = "INSERT INTO collection VALUES (?,?,?);";
+            PreparedStatement ps = con.prepareStatement(strQuery);
+            ps.setString(1, dtDate);
+            ps.setString(2, strInformation);
+            ps.setFloat(3, fAmount);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    public static List<Collection> getCollectionDetails(String Date) throws ClassNotFoundException, SQLException {
+        List<Collection> lstCollection = new ArrayList<>();
+        try (Connection con = ConnectionFactory.getConnection();) {
+            String strQuery = "SELECT * FROM billing.collection where Transaction_Date = ?";
+            PreparedStatement ps = con.prepareStatement(strQuery);
+            ps.setString(1, Date);
+            ResultSet iResult = ps.executeQuery();
+            while (iResult.next()) {
+                Collection collection = new Collection();
+                collection.setInformation(iResult.getString("Transaction_Info"));
+                collection.setTotalAmt(iResult.getString("Transaction_Amount"));
+                lstCollection.add(collection);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return lstCollection;
     }
 
     public static int setBLOBObject(CustomerBillInfo customerBillInfo) throws ClassNotFoundException, SQLException, Exception {
