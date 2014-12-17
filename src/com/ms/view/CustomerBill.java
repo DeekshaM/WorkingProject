@@ -50,6 +50,8 @@ public class CustomerBill extends javax.swing.JFrame {
     public CustomerBill() throws ClassNotFoundException, SQLException, Exception {
         setUIFont(new javax.swing.plaf.FontUIResource("Verdana", Font.PLAIN, 11));
         initComponents();
+        btnAdd.setVisible(false);
+        btnRemove.setVisible(false);
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(new MyDispatcher());
         int componentCount = pnlParent.getComponentCount();
@@ -92,6 +94,7 @@ public class CustomerBill extends javax.swing.JFrame {
         tfRecivedAmt = new javax.swing.JTextField();
         btnDone = new javax.swing.JButton();
         btnNewBill = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         pnlHeader1 = new javax.swing.JPanel();
         lblHeader = new javax.swing.JLabel();
@@ -110,7 +113,7 @@ public class CustomerBill extends javax.swing.JFrame {
         setTitle("Customer Bill");
         setMaximumSize(new java.awt.Dimension(250, 160));
         setMinimumSize(new java.awt.Dimension(250, 160));
-        setPreferredSize(new java.awt.Dimension(430, 140));
+        setPreferredSize(new java.awt.Dimension(530, 140));
         setResizable(false);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
@@ -148,17 +151,17 @@ public class CustomerBill extends javax.swing.JFrame {
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66)
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addGap(42, 42, 42)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel5)
-                .addGap(23, 23, 23))
+                .addGap(37, 37, 37))
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,6 +252,8 @@ public class CustomerBill extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Recived Amount :");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -264,11 +269,13 @@ public class CustomerBill extends javax.swing.JFrame {
                 .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(btnDone)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTotalName)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -284,7 +291,8 @@ public class CustomerBill extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblTotalName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblTotalAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblTotalAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7))
                     .addComponent(btnNewBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(2, 2, 2))
         );
@@ -297,11 +305,13 @@ public class CustomerBill extends javax.swing.JFrame {
         jPanel4.setLayout(new java.awt.BorderLayout());
 
         pnlHeader1.setBackground(new java.awt.Color(255, 255, 255));
+        pnlHeader1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
-        lblHeader.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        lblHeader.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
         lblHeader.setText("Manchala Shankaraiah & Sons, ");
 
-        jLabel9.setText("Markandaya Street, Sircilla");
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel9.setText("Markandaya Street, Sircilla - 505301");
 
         javax.swing.GroupLayout pnlHeader1Layout = new javax.swing.GroupLayout(pnlHeader1);
         pnlHeader1.setLayout(pnlHeader1Layout);
@@ -311,8 +321,8 @@ public class CustomerBill extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(lblHeader)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlHeader1Layout.setVerticalGroup(
             pnlHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,34 +340,34 @@ public class CustomerBill extends javax.swing.JFrame {
         pnlDetails.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         pnlDetails.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblName.setText("Name");
+        lblName.setText("Name :");
         pnlDetails.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 3, -1, -1));
 
-        lblBno.setText("B.No ");
+        lblBno.setText("B.No  :");
         pnlDetails.add(lblBno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        jLabel6.setText("Date ");
-        pnlDetails.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 50, -1));
+        jLabel6.setText("Date :");
+        pnlDetails.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 50, -1));
 
         lblDate.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
         lblDate.setText("0");
-        pnlDetails.add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 20, 80, -1));
+        pnlDetails.add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 90, -1));
 
         lblCustomerBno.setText("1");
-        pnlDetails.add(lblCustomerBno, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 45, -1));
+        pnlDetails.add(lblCustomerBno, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 45, -1));
 
         ((AbstractDocument) tfName.getDocument()).setDocumentFilter(filter);
-        pnlDetails.add(tfName, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 0, 170, -1));
+        pnlDetails.add(tfName, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 0, 240, 20));
 
-        lblArea.setText("Mobile No");
-        pnlDetails.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, -1, 20));
+        lblArea.setText("Mobile No :");
+        pnlDetails.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, 20));
 
         tfMobileNum.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfMobileNumKeyTyped(evt);
             }
         });
-        pnlDetails.add(tfMobileNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 90, -1));
+        pnlDetails.add(tfMobileNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 90, -1));
 
         jPanel4.add(pnlDetails, java.awt.BorderLayout.CENTER);
 
@@ -686,6 +696,7 @@ public class CustomerBill extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
