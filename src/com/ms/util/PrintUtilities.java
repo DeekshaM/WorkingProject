@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ms.view;
+package com.ms.util;
 
 import java.awt.Component;
 import java.awt.Dimension;

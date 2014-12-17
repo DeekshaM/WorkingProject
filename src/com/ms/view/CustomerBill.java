@@ -4,6 +4,7 @@
  */
 package com.ms.view;
 
+import com.ms.util.PrintUtilities;
 import com.ms.data.BillDetails;
 import com.ms.data.BillMain;
 import com.ms.data.ItemDetails;
