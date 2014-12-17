@@ -32,7 +32,7 @@ public class AddRow extends javax.swing.JPanel {
 //               JOptionPane.showMessageDialog(this,"AddRow_AddRow \n Exception is Occured at Loading..... a File \n"+e.getMessage());
 //            }
         for(ItemDetails item : CustomerBill.lstItems) {
-            timesArray.add(item.getItemName()+", "+item.getItemNumber());
+            timesArray.add(item.getItemNumber()+"' "+item.getItemName());
         }
         AutoTextComplete atc = new AutoTextComplete(tfName);
         atc.setItems(timesArray);
