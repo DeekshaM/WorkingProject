@@ -32,7 +32,7 @@ public class AddRow extends javax.swing.JPanel {
 //               JOptionPane.showMessageDialog(this,"AddRow_AddRow \n Exception is Occured at Loading..... a File \n"+e.getMessage());
 //            }
         for(ItemDetails item : CustomerBill.lstItems) {
-            timesArray.add(item.getItemNumber()+"' "+item.getItemName());
+            timesArray.add(item.getItemNumber()+", "+item.getItemName());
         }
         AutoTextComplete atc = new AutoTextComplete(tfName);
         atc.setItems(timesArray);
@@ -173,8 +173,8 @@ public class AddRow extends javax.swing.JPanel {
 
     private void tfNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNameActionPerformed
         for(ItemDetails idetail: CustomerBill.lstItems) {
-            String[] strItemName = tfName.getText().split(",");
-            if(idetail.getItemName().equals(strItemName[0])) {
+            String[] strItemName = tfName.getText().split(", ");
+            if(String.valueOf(idetail.getItemNumber()).equals(strItemName[0].trim())) {
                 tfPrice.setValue(idetail.getSalePrice());
             }
         }
