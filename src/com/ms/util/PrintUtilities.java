@@ -48,7 +48,7 @@ import javax.swing.RepaintManager;
           return(NO_SUCH_PAGE);  
         } else {  
           Graphics2D g2d = (Graphics2D)g;  
-          g2d.translate(pageFormat.getImageableX()+15, pageFormat.getImageableY()); //-180 
+          g2d.translate(pageFormat.getImageableX()+15, pageFormat.getImageableY()-120);  
           disableDoubleBuffering(componentToBePrinted);  
     // scale to fill the page          
     double dw = pageFormat.getImageableWidth()+50;
