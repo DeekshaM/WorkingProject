@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ms.view;
+package com.ms.util;
 
 /**
  *
@@ -14,7 +14,7 @@ import java.awt.event.*;
 import java.awt.*;
 
 public class AutoTextComplete extends JWindow
-        implements KeyListener, FocusListener, ActionListener {
+        implements KeyListener, FocusListener, ActionListener, MouseListener {
 
     JTextComponent parent = null;
     JList lst = null;
@@ -29,6 +29,7 @@ public class AutoTextComplete extends JWindow
         lst = new JList();
         lst.addKeyListener(this);
         lst.addFocusListener(this);
+        lst.addMouseListener(this);
         this.getContentPane().add(new JScrollPane(lst), BorderLayout.CENTER);
  
        // ((JPanel) this.getContentPane()).setBorder(BorderFactory.createLineBorder(Color.red, 3));
@@ -45,6 +46,7 @@ public class AutoTextComplete extends JWindow
         }
         jc.addFocusListener(this);
         jc.addKeyListener(this);
+        jc.addMouseListener(this);
 //        parent.addFocusListener(new FocusAdapter(){
 //            public void focusGained(FocusEvent fe)
 //            {
@@ -304,5 +306,32 @@ public class AutoTextComplete extends JWindow
             this.setAlwaysOnTop(true);
         }
         lst.setSelectedIndex(index >= tempVector.size() || index < 0 ? 0 : index);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        if(me.getClickCount() == 2) {
+            select(true);
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+        
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+        
     }
 }

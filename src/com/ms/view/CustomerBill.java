@@ -50,8 +50,8 @@ public class CustomerBill extends javax.swing.JFrame {
     public CustomerBill() throws ClassNotFoundException, SQLException, Exception {
         setUIFont(new javax.swing.plaf.FontUIResource("Verdana", Font.PLAIN, 11));
         initComponents();
-        btnAdd.setVisible(false);
-        btnRemove.setVisible(false);
+//        btnAdd.setVisible(false);
+//        btnRemove.setVisible(false);
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(new MyDispatcher());
         int componentCount = pnlParent.getComponentCount();
@@ -113,8 +113,7 @@ public class CustomerBill extends javax.swing.JFrame {
         setTitle("Customer Bill");
         setMaximumSize(new java.awt.Dimension(250, 160));
         setMinimumSize(new java.awt.Dimension(250, 160));
-        setPreferredSize(new java.awt.Dimension(530, 140));
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(530, 135));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
@@ -150,11 +149,11 @@ public class CustomerBill extends javax.swing.JFrame {
         pnlHeaderLayout.setHorizontalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
+                .addComponent(jLabel8)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel3)
                 .addGap(42, 42, 42)
@@ -305,13 +304,12 @@ public class CustomerBill extends javax.swing.JFrame {
         jPanel4.setLayout(new java.awt.BorderLayout());
 
         pnlHeader1.setBackground(new java.awt.Color(255, 255, 255));
-        pnlHeader1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         lblHeader.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
-        lblHeader.setText("Manchala Shankaraiah & Sons, ");
+        lblHeader.setText("Dummy Project for ValueLabs ");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel9.setText("Markandaya Street, Sircilla - 505301");
+        jLabel9.setText("Hitech City, Madapur, Hyderabad");
 
         javax.swing.GroupLayout pnlHeader1Layout = new javax.swing.GroupLayout(pnlHeader1);
         pnlHeader1.setLayout(pnlHeader1Layout);
@@ -321,7 +319,7 @@ public class CustomerBill extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(lblHeader)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlHeader1Layout.setVerticalGroup(
@@ -407,7 +405,7 @@ public class CustomerBill extends javax.swing.JFrame {
                     tableInfo.setPieceRate(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfPrice.getText()));
                     tableInfo.setAmount(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfAmount.getText()));
                     lstOfTableInfo.add(tableInfo);
-                }
+                } 
             }
             if (lstOfTableInfo.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please Enter Item Details", "Item Details Can't be blank", JOptionPane.INFORMATION_MESSAGE);
@@ -449,28 +447,30 @@ public class CustomerBill extends javax.swing.JFrame {
         removeDetails();
     }//GEN-LAST:event_btnRemoveActionPerformed
     private void removeDetails() {
-        for (int iCount = pnlParent.getComponentCount() - 1; iCount >= 5; iCount--) {
-            AddRow row = ((AddRow) pnlParent.getComponent(iCount));
-            if (row.tfName.getText().equals("") && row.tfQuantity.getText().equals("") && row.tfPrice.getText().equals("")) {
-                pnlParent.remove(iCount);
+        if(pnlParent.getComponentCount() > 5) {
+            for (int iCount = pnlParent.getComponentCount() - 1; iCount >= 5; iCount--) {
+                AddRow row = ((AddRow) pnlParent.getComponent(iCount));
+                if (row.tfName.getText().equals("") && row.tfQuantity.getText().equals("") && row.tfPrice.getText().equals("")) {
+                    pnlParent.remove(iCount);
+                }
             }
+            if (pnlParent.getComponentCount() == 0) {
+                AddRow row = new AddRow();
+                pnlParent.add(row);
+            }
+            for (int i = 0; i < pnlParent.getComponentCount(); i++) {
+                AddRow row = ((AddRow) pnlParent.getComponent(i));
+                row.tfNo.setText(" " + (i + 1) + " ");
+            }
+            int iHeight = 5 * 19 + 6;
+            pnlParent.setPreferredSize(new Dimension(654, pnlParent.getHeight() - iHeight));
+            pnlParent.setMaximumSize(new Dimension(654, pnlParent.getHeight() - iHeight));
+            this.setSize(this.getWidth(), this.getHeight() - iHeight);
+//            pnlParent.validate();
+//            pnlParent.repaint();
+//            this.validate();
+//            this.repaint();
         }
-        if (pnlParent.getComponentCount() == 0) {
-            AddRow row = new AddRow();
-            pnlParent.add(row);
-        }
-        for (int i = 0; i < pnlParent.getComponentCount(); i++) {
-            AddRow row = ((AddRow) pnlParent.getComponent(i));
-            row.tfNo.setText(" " + (i + 1) + " ");
-        }
-        int iHeight = 5 * 19 + 6;
-        pnlParent.setPreferredSize(new Dimension(654, pnlParent.getHeight() - iHeight));
-        pnlParent.setMaximumSize(new Dimension(654, pnlParent.getHeight() - iHeight));
-        this.setSize(this.getWidth(), this.getHeight() - iHeight);
-        pnlParent.validate();
-        pnlParent.repaint();
-        this.validate();
-        this.repaint();
     }
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
 //        System.out.println(this.getHeight());
@@ -513,7 +513,6 @@ public class CustomerBill extends javax.swing.JFrame {
             } else {
                 break;
             }
-
             row.tfQuantity.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyReleased(KeyEvent e) {

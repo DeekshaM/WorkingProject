@@ -39,6 +39,7 @@ public class MainForm extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Customer Information");
 
         jButton1.setText("Customer Bill");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

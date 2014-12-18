@@ -4,6 +4,7 @@
  */
 package com.ms.view;
 
+import com.ms.util.AutoTextComplete;
 import com.ms.data.ItemDetails;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
