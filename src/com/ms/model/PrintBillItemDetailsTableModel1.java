@@ -13,12 +13,12 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author vmanchala
  */
-public class BillItemDetailsTableModel extends AbstractTableModel{
+public class PrintBillItemDetailsTableModel1 extends AbstractTableModel{
 
     protected String[] columnNames = {"No","Item Name", "Type", "Qty", "Price", "Amount"};
     private List<BillDetails> lstBillDetails;
     
-    public BillItemDetailsTableModel(List<BillDetails> lstBillDetails) {
+    public PrintBillItemDetailsTableModel1(List<BillDetails> lstBillDetails) {
         this.lstBillDetails = lstBillDetails;    
     }
     
@@ -34,7 +34,7 @@ public class BillItemDetailsTableModel extends AbstractTableModel{
      public Class getColumnClass(String column) {
          switch (column) {   
              case "No":
-                 return String.class;
+                 return Integer.class;
             case "Item Name":
                 return String.class;
             case "Type":
@@ -55,7 +55,7 @@ public class BillItemDetailsTableModel extends AbstractTableModel{
          BillDetails record = lstBillDetails.get(row);
          switch (column) { 
              case 0:
-                 return "*";
+                 return record.getNo();
              case 1:
                 return record.getItemName();
              case 2:

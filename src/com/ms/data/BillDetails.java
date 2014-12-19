@@ -11,7 +11,8 @@ package com.ms.data;
  * @author Venugopal
  */
 public class BillDetails {
-    
+        
+    private int iNo;
     private int billNumber;
     private String itemName;
     private String itemType;
@@ -101,6 +102,20 @@ public class BillDetails {
      */
     public void setPieceRate(float pieceRate) {
         this.pieceRate = pieceRate;
+    }
+
+    /**
+     * @return the iNo
+     */
+    public int getNo() {
+        return iNo;
+    }
+
+    /**
+     * @param iNo the iNo to set
+     */
+    public void setNo(int iNo) {
+        this.iNo = iNo;
     }
     
 }

@@ -46,6 +46,8 @@ public class CustomerBill extends javax.swing.JFrame {
     List<String> lstUserDetails;
     DocumentFilter filter = new UppercaseDocumentFilter();
     public static List<ItemDetails> lstItems;
+    private List<BillDetails> lstOfTableInfo;
+    private BillMain billDetails;
 
     public CustomerBill() throws ClassNotFoundException, SQLException, Exception {
         setUIFont(new javax.swing.plaf.FontUIResource("Verdana", Font.PLAIN, 11));
@@ -377,7 +379,9 @@ public class CustomerBill extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-        PrintUtilities.printComponent(pnlAll);
+        //PrintUtilities.printComponent(pnlAll);
+        new PrintMultipleTables(lstOfTableInfo, billDetails);
+        
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void setDataInDB() {
@@ -394,10 +398,11 @@ public class CustomerBill extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please Enter Recived Amount", "Recived Amount Can't be blank", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
-            List<BillDetails> lstOfTableInfo = new ArrayList<>();
+            lstOfTableInfo = new ArrayList<>();
             for (int i = 0; i < pnlParent.getComponentCount(); i++) {
                 BillDetails tableInfo = new BillDetails();
                 if (!((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && !((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty()) {
+                    tableInfo.setNo(Integer.valueOf(((AddRow) pnlParent.getComponent(i)).tfNo.getText().trim()));
                     tableInfo.setBillNumber(Integer.valueOf(lblCustomerBno.getText()));
                     tableInfo.setItemName(((AddRow) pnlParent.getComponent(i)).tfName.getText());
                     tableInfo.setItemType(((AddRow) pnlParent.getComponent(i)).tfType.getText());
@@ -411,7 +416,7 @@ public class CustomerBill extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please Enter Item Details", "Item Details Can't be blank", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }            
-            BillMain billDetails = new BillMain();
+            billDetails = new BillMain();
             billDetails.setBillNo(Integer.valueOf(lblCustomerBno.getText()));
             billDetails.setBillDate(lblDate.getText());
             billDetails.setName(tfName.getText());

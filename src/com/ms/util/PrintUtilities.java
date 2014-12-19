@@ -48,10 +48,10 @@ import javax.swing.RepaintManager;
           return(NO_SUCH_PAGE);  
         } else {  
           Graphics2D g2d = (Graphics2D)g;  
-          g2d.translate(pageFormat.getImageableX()+15, pageFormat.getImageableY()-120);  
+          g2d.translate(pageFormat.getImageableX()+15, pageFormat.getImageableY()-60);  
           disableDoubleBuffering(componentToBePrinted);  
     // scale to fill the page          
-    double dw = pageFormat.getImageableWidth()+50;
+    double dw = pageFormat.getImageableWidth()+185;//+50
     double dh = pageFormat.getImageableHeight();  
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();  
       
@@ -71,7 +71,7 @@ import javax.swing.RepaintManager;
         ty = Math.floor(0.5*(yScale-scale)*screenSize.height);  
     }  
     g2d.translate(tx, ty);  
-    g2d.scale(scale, scale+0.4);  
+    g2d.scale(scale, scale+0.2);  
       
     componentToBePrinted.paint(g2d);  
     enableDoubleBuffering(componentToBePrinted);  
