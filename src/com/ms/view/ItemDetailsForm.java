@@ -22,6 +22,7 @@ public class ItemDetailsForm extends javax.swing.JFrame {
     /**
      * Creates new form ItemDetailsForm
      */
+    private ItemDetails  itemDetails;
     public ItemDetailsForm() {
         initComponents();
     }
@@ -53,6 +54,7 @@ public class ItemDetailsForm extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         tfItemNumber = new javax.swing.JFormattedTextField();
         tfItemSellPrice = new javax.swing.JFormattedTextField();
+        jButton2 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -108,6 +110,13 @@ public class ItemDetailsForm extends javax.swing.JFrame {
 
         tfItemSellPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.###"))));
 
+        jButton2.setText("Update Item");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,6 +125,8 @@ public class ItemDetailsForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnInsertItem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancel))
@@ -176,7 +187,8 @@ public class ItemDetailsForm extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInsertItem)
-                    .addComponent(btnCancel))
+                    .addComponent(btnCancel)
+                    .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -185,7 +197,7 @@ public class ItemDetailsForm extends javax.swing.JFrame {
 
     private void btnInsertItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertItemActionPerformed
         try {
-            ItemDetails  itemDetails = new ItemDetails();
+            itemDetails = new ItemDetails();
             int itemNumber = Integer.valueOf(tfItemNumber.getValue().toString());
             itemDetails.setItemNumber(itemNumber);
             itemDetails.setItemName(tfItemName.getText());
@@ -218,6 +230,10 @@ public class ItemDetailsForm extends javax.swing.JFrame {
             Logger.getLogger(ItemDetailsForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        UpdateItemDetails updateItem = new UpdateItemDetails(itemDetails);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -258,6 +274,7 @@ public class ItemDetailsForm extends javax.swing.JFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnInsertItem;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLabel lblItemCode;
     private javax.swing.JLabel lblItemDetail;

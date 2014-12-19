@@ -226,6 +226,11 @@ public class CustomerBill extends javax.swing.JFrame {
                 tfRecivedAmtActionPerformed(evt);
             }
         });
+        tfRecivedAmt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfRecivedAmtKeyTyped(evt);
+            }
+        });
 
         btnDone.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ms/images/Done.png"))); // NOI18N
         btnDone.setToolTipText("Insert Data Into Database");
@@ -424,9 +429,9 @@ public class CustomerBill extends javax.swing.JFrame {
             billDetails.setTotalAmt(Float.valueOf(lblTotalAmount.getText()));
             billDetails.setBillMainCol("Somthing");
             billDetails.setCreatedBy(lstUserDetails.get(0));
-            billDetails.setReceivedAmt(Float.valueOf(tfRecivedAmt.getText()));
-            CustomerDataFactory.setBillDetails(billDetails);
+            billDetails.setReceivedAmt(Float.valueOf(tfRecivedAmt.getText()));            
             CustomerDataFactory.setBillItems(lstOfTableInfo);
+            CustomerDataFactory.setBillDetails(billDetails);
             if(Float.valueOf(tfRecivedAmt.getText()) > 1) {
                 CustomerDataFactory.addTransction(lblDate.getText(),lblCustomerBno.getText()+", "+ tfName.getText(), Float.valueOf(tfRecivedAmt.getText()));
             }
@@ -508,6 +513,12 @@ public class CustomerBill extends javax.swing.JFrame {
             Logger.getLogger(CustomerBill.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnNewBillActionPerformed
+
+    private void tfRecivedAmtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfRecivedAmtKeyTyped
+        if (!((evt.getKeyChar() >= '0' && evt.getKeyChar() <= '9') || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) || evt.getKeyChar() == '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfRecivedAmtKeyTyped
 
     private void addDetails(int iComp, int add) {
         for (int i = iComp; i < iComp + add; i++) {

@@ -122,7 +122,7 @@ public class CustomerDataFactory {
     public static int setItemDetails(ItemDetails itemDetails) throws ClassNotFoundException, SQLException {
         
         try (Connection con = ConnectionFactory.getConnection();) {
-            String strQuery = "INSERT INTO item_details VALUES (?,?,?,?,?,?,?);";
+            String strQuery = "REPLACE INTO item_details VALUES (?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(strQuery);
             ps.setInt(1, itemDetails.getItemNumber());
             ps.setString(2, itemDetails.getItemName());
