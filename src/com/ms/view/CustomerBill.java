@@ -52,8 +52,6 @@ public class CustomerBill extends javax.swing.JFrame {
     public CustomerBill() throws ClassNotFoundException, SQLException, Exception {
         setUIFont(new javax.swing.plaf.FontUIResource("Verdana", Font.PLAIN, 11));
         initComponents();
-//        btnAdd.setVisible(false);
-//        btnRemove.setVisible(false);
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(new MyDispatcher());
         int componentCount = pnlParent.getComponentCount();
@@ -405,17 +403,46 @@ public class CustomerBill extends javax.swing.JFrame {
             }
             lstOfTableInfo = new ArrayList<>();
             for (int i = 0; i < pnlParent.getComponentCount(); i++) {
+                if (((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && ((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty() && 
+                        ((AddRow) pnlParent.getComponent(i)).tfName.getText().isEmpty()) {
+                    continue;
+                }   
                 BillDetails tableInfo = new BillDetails();
-                if (!((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && !((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty()) {
-                    tableInfo.setNo(Integer.valueOf(((AddRow) pnlParent.getComponent(i)).tfNo.getText().trim()));
-                    tableInfo.setBillNumber(Integer.valueOf(lblCustomerBno.getText()));
-                    tableInfo.setItemName(((AddRow) pnlParent.getComponent(i)).tfName.getText());
-                    tableInfo.setItemType(((AddRow) pnlParent.getComponent(i)).tfType.getText());
+                if (!((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && !((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty() &&
+                        !((AddRow) pnlParent.getComponent(i)).tfName.getText().isEmpty()) {
                     tableInfo.setQuantity(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfQuantity.getText()));
                     tableInfo.setPieceRate(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfPrice.getText()));
+                    tableInfo.setItemName(((AddRow) pnlParent.getComponent(i)).tfName.getText()); 
+                    tableInfo.setNo(Integer.valueOf(((AddRow) pnlParent.getComponent(i)).tfNo.getText().trim()));
+                    tableInfo.setBillNumber(Integer.valueOf(lblCustomerBno.getText()));                
+                    tableInfo.setItemType(((AddRow) pnlParent.getComponent(i)).tfType.getText());
                     tableInfo.setAmount(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfAmount.getText()));
                     lstOfTableInfo.add(tableInfo);
-                } 
+                    continue;
+                }                
+                if (!((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty()) {
+                    tableInfo.setQuantity(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfQuantity.getText()));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Please Enter Quantity", "Quantity can't be blank"+ i+1, JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                if(!((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty()) {
+                    tableInfo.setPieceRate(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfPrice.getText()));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Please Enter Price", "Price can't be blank"+ i+1, JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }                 
+                if(!((AddRow) pnlParent.getComponent(i)).tfName.getText().isEmpty()) {
+                    tableInfo.setItemName(((AddRow) pnlParent.getComponent(i)).tfName.getText());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Please Enter Item name", "Item Name can't be blank"+ i+1, JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+//                tableInfo.setNo(Integer.valueOf(((AddRow) pnlParent.getComponent(i)).tfNo.getText().trim()));
+//                tableInfo.setBillNumber(Integer.valueOf(lblCustomerBno.getText()));                
+//                tableInfo.setItemType(((AddRow) pnlParent.getComponent(i)).tfType.getText());
+//                tableInfo.setAmount(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfAmount.getText()));
+//                lstOfTableInfo.add(tableInfo);
             }
             if (lstOfTableInfo.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please Enter Item Details", "Item Details Can't be blank", JOptionPane.INFORMATION_MESSAGE);

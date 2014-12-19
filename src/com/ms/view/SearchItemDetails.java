@@ -21,6 +21,7 @@ public class SearchItemDetails extends javax.swing.JFrame {
     /**
      * Creates new form SearchItemDetails
      */
+    ItemDetails itemDetail;
     public SearchItemDetails() {
         initComponents();
     }
@@ -47,6 +48,10 @@ public class SearchItemDetails extends javax.swing.JFrame {
         tfPurchasePrice = new javax.swing.JTextField();
         tfPurchaseCompany = new javax.swing.JTextField();
         tfItemDetails = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        tfItemName = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Search Item Details");
@@ -88,29 +93,49 @@ public class SearchItemDetails extends javax.swing.JFrame {
 
         tfItemDetails.setEditable(false);
 
+        jLabel1.setText("Item name :");
+
+        tfItemName.setEditable(false);
+
+        jButton2.setText("Update Item");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Cancel");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(lblItemDetails)
+                            .addComponent(lblPurchasePrice)
+                            .addComponent(lblPurchaseCompany)
+                            .addComponent(lblSellPrice)
+                            .addComponent(lblPriceCode)
+                            .addComponent(lblItemNumber))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ftItemNumber)
+                            .addComponent(tfPriceCode, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                            .addComponent(tfSellPrice)
+                            .addComponent(tfPurchasePrice)
+                            .addComponent(tfPurchaseCompany)
+                            .addComponent(tfItemDetails)
+                            .addComponent(tfItemName))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblItemDetails, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblPurchasePrice, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblPurchaseCompany, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblSellPrice, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblPriceCode, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblItemNumber, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ftItemNumber)
-                    .addComponent(tfPriceCode, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                    .addComponent(tfSellPrice)
-                    .addComponent(tfPurchasePrice)
-                    .addComponent(tfPurchaseCompany)
-                    .addComponent(tfItemDetails))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                    .addComponent(jButton1)
+                    .addComponent(jButton3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -121,6 +146,10 @@ public class SearchItemDetails extends javax.swing.JFrame {
                     .addComponent(lblItemNumber)
                     .addComponent(ftItemNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(tfItemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPriceCode)
@@ -141,7 +170,11 @@ public class SearchItemDetails extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblItemDetails)
                     .addComponent(tfItemDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -156,8 +189,9 @@ public class SearchItemDetails extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             int itemNumber = Integer.valueOf(ftItemNumber.getValue().toString());
-            ItemDetails itemDetail = CustomerDataFactory.getItemSearch(itemNumber);
+            itemDetail = CustomerDataFactory.getItemSearch(itemNumber);            
             tfItemDetails.setText(itemDetail.getItemDetail());
+            tfItemName.setText(itemDetail.getItemName());
             tfPriceCode.setText(itemDetail.getItemCode());
             tfPurchaseCompany.setText(itemDetail.getPurchasedCompany());
             tfPurchasePrice.setText(String.valueOf(itemDetail.getPurchasedPrice()));
@@ -166,6 +200,14 @@ public class SearchItemDetails extends javax.swing.JFrame {
             Logger.getLogger(SearchItemDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(itemDetail != null) {
+            UpdateItemDetails updateItem = new UpdateItemDetails(itemDetail);
+            updateItem.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -205,6 +247,9 @@ public class SearchItemDetails extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField ftItemNumber;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblItemDetails;
     private javax.swing.JLabel lblItemNumber;
     private javax.swing.JLabel lblPriceCode;
@@ -212,6 +257,7 @@ public class SearchItemDetails extends javax.swing.JFrame {
     private javax.swing.JLabel lblPurchasePrice;
     private javax.swing.JLabel lblSellPrice;
     private javax.swing.JTextField tfItemDetails;
+    private javax.swing.JTextField tfItemName;
     private javax.swing.JTextField tfPriceCode;
     private javax.swing.JTextField tfPurchaseCompany;
     private javax.swing.JTextField tfPurchasePrice;
