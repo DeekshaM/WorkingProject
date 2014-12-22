@@ -15,9 +15,9 @@ import java.util.List;
 public class CustomerBillInfo implements Serializable{
     
     private String strName;
-    private String iMobileNum;
+    private String iMobileNo;
     private int iBillNumber;
-    private Date lastBillDate;
+    private Date dtBillDate;
     private int iAccountNumber;
     private double dTotalAmt;
     private List<BillDetails> lstOfTableInfo;
@@ -37,11 +37,11 @@ public class CustomerBillInfo implements Serializable{
     }
 
     public String getMobileNum() {
-        return iMobileNum;
+        return iMobileNo;
     }
 
     public void setMobileNum(String iMobileNum) {
-        this.iMobileNum = iMobileNum;
+        this.iMobileNo = iMobileNum;
     }
 
     public int getBillNumber() {
@@ -53,11 +53,11 @@ public class CustomerBillInfo implements Serializable{
     }
 
     public Date getLastBillDate() {
-        return lastBillDate;
+        return dtBillDate;
     }
 
     public void setLastBillDate(Date lastBillDate) {
-        this.lastBillDate = lastBillDate;
+        this.dtBillDate = lastBillDate;
     }
 
     public int getAccountNumber() {

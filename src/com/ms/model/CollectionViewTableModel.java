@@ -44,12 +44,12 @@ public class CollectionViewTableModel extends AbstractTableModel{
 
     @Override
      public Object getValueAt(int row, int column) {
-         Collection record = lstCollection.get(row);
+         Collection collection = lstCollection.get(row);
          switch (column) { 
              case 0:
-                 return record.getInformation();
+                 return collection.getInformation();
              case 1:
-                return record.getTotalAmt();
+                return collection.getTotalAmt();
              default:
                 return new Object();
          }
@@ -57,13 +57,13 @@ public class CollectionViewTableModel extends AbstractTableModel{
 
     @Override
      public void setValueAt(Object value, int row, int column) {
-         Collection record = lstCollection.get(row);
+         Collection collection = lstCollection.get(row);
          switch (column) {             
              case 0:
-                record.setInformation((String)value);
+                collection.setInformation((String)value);
                 break;
              case 1:
-                record.setTotalAmt((String)value);
+                collection.setTotalAmt((String)value);
                 break;
              default:
                 System.out.println("invalid index");

@@ -37,8 +37,7 @@ public class AutoTextComplete extends JWindow
     }
 
     public AutoTextComplete(JComponent jc) {
-        this();
-        System.out.println("In the AutoTextComplete Class");
+        this();    
         if (jc instanceof JTable) {
             tableParent = (JTable) jc;
         } else {

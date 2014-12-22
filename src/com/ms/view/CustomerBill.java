@@ -341,36 +341,69 @@ public class CustomerBill extends javax.swing.JFrame {
 
         pnlDetails.setBackground(new java.awt.Color(255, 255, 255));
         pnlDetails.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        pnlDetails.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblName.setText("Name :");
-        pnlDetails.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 3, -1, -1));
 
         lblBno.setText("B.No  :");
-        pnlDetails.add(lblBno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         jLabel6.setText("Date :");
-        pnlDetails.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 50, -1));
 
         lblDate.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
         lblDate.setText("0");
-        pnlDetails.add(lblDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 90, -1));
 
         lblCustomerBno.setText("1");
-        pnlDetails.add(lblCustomerBno, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 45, -1));
 
         ((AbstractDocument) tfName.getDocument()).setDocumentFilter(filter);
-        pnlDetails.add(tfName, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 0, 240, 20));
 
         lblArea.setText("Mobile No :");
-        pnlDetails.add(lblArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, 20));
 
         tfMobileNum.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfMobileNumKeyTyped(evt);
             }
         });
-        pnlDetails.add(tfMobileNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 90, -1));
+
+        javax.swing.GroupLayout pnlDetailsLayout = new javax.swing.GroupLayout(pnlDetails);
+        pnlDetails.setLayout(pnlDetailsLayout);
+        pnlDetailsLayout.setHorizontalGroup(
+            pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDetailsLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblBno, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblName, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDetailsLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlDetailsLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(lblCustomerBno, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblArea, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(17, 17, 17)
+                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfMobileNum, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        pnlDetailsLayout.setVerticalGroup(
+            pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDetailsLayout.createSequentialGroup()
+                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDetailsLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lblName))
+                    .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfMobileNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblBno)
+                    .addComponent(lblCustomerBno)
+                    .addComponent(jLabel6)
+                    .addComponent(lblDate)))
+        );
 
         jPanel4.add(pnlDetails, java.awt.BorderLayout.CENTER);
 
@@ -389,18 +422,18 @@ public class CustomerBill extends javax.swing.JFrame {
 
     private void setDataInDB() {
         try {
-            if (tfName.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please Enter Customer Name", "Customer Name Can't be blank", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-            if (tfMobileNum.getText().length() < 10) {
-                JOptionPane.showMessageDialog(this, "Please Enter Customer Mobile No", "Mobile No Can't be blank", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-            if(tfRecivedAmt.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please Enter Recived Amount", "Recived Amount Can't be blank", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
+//            if (tfName.getText().isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Please Enter Customer Name", "Customer Name Can't be blank", JOptionPane.INFORMATION_MESSAGE);
+//                return;
+//            }
+//            if (tfMobileNum.getText().length() < 10) {
+//                JOptionPane.showMessageDialog(this, "Please Enter Customer Mobile No", "Mobile No Can't be blank", JOptionPane.INFORMATION_MESSAGE);
+//                return;
+//            }
+//            if(tfRecivedAmt.getText().isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Please Enter Recived Amount", "Recived Amount Can't be blank", JOptionPane.INFORMATION_MESSAGE);
+//                return;
+//            }
             lstOfTableInfo = new ArrayList<>();
             for (int i = 0; i < pnlParent.getComponentCount(); i++) {
                 if (((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && ((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty() && 
@@ -411,7 +444,7 @@ public class CustomerBill extends javax.swing.JFrame {
                 if (!((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && !((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty() &&
                         !((AddRow) pnlParent.getComponent(i)).tfName.getText().isEmpty()) {
                     tableInfo.setQuantity(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfQuantity.getText()));
-                    tableInfo.setPieceRate(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfPrice.getText()));
+                    tableInfo.setRate(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfPrice.getText()));
                     tableInfo.setItemName(((AddRow) pnlParent.getComponent(i)).tfName.getText()); 
                     tableInfo.setNo(Integer.valueOf(((AddRow) pnlParent.getComponent(i)).tfNo.getText().trim()));
                     tableInfo.setBillNumber(Integer.valueOf(lblCustomerBno.getText()));                
@@ -427,7 +460,7 @@ public class CustomerBill extends javax.swing.JFrame {
                     return;
                 }
                 if(!((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty()) {
-                    tableInfo.setPieceRate(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfPrice.getText()));
+                    tableInfo.setRate(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfPrice.getText()));
                 } else {
                     JOptionPane.showMessageDialog(this, "Please Enter Price", "Price can't be blank"+ i+1, JOptionPane.INFORMATION_MESSAGE);
                     return;
@@ -453,15 +486,12 @@ public class CustomerBill extends javax.swing.JFrame {
             billDetails.setBillDate(lblDate.getText());
             billDetails.setName(tfName.getText());
             billDetails.setMobileNumber(tfMobileNum.getText());
-            billDetails.setTotalAmt(Float.valueOf(lblTotalAmount.getText()));
-            billDetails.setBillMainCol("Somthing");
+            billDetails.setTotalAmt(Float.valueOf(lblTotalAmount.getText()));            
             billDetails.setCreatedBy(lstUserDetails.get(0));
-            billDetails.setReceivedAmt(Float.valueOf(tfRecivedAmt.getText()));            
+            billDetails.setReceivedAmt(Float.valueOf(tfRecivedAmt.getText().isEmpty() ? "0" : tfRecivedAmt.getText()));            
             CustomerDataFactory.setBillItems(lstOfTableInfo);
             CustomerDataFactory.setBillDetails(billDetails);
-            if(Float.valueOf(tfRecivedAmt.getText()) > 1) {
-                CustomerDataFactory.addTransction(lblDate.getText(),lblCustomerBno.getText()+", "+ tfName.getText(), Float.valueOf(tfRecivedAmt.getText()));
-            }
+            CustomerDataFactory.addTransction(lblDate.getText(),lblCustomerBno.getText()+", "+ tfName.getText(), Float.valueOf(tfRecivedAmt.getText().isEmpty() ? "0" : tfRecivedAmt.getText()));            
             btnPrint.setEnabled(true);
             JOptionPane.showMessageDialog(this, "Bill Successfully Inserted in DB", "Bill Inserted Successfully", JOptionPane.INFORMATION_MESSAGE);
             btnDone.setEnabled(false);
@@ -561,11 +591,9 @@ public class CustomerBill extends javax.swing.JFrame {
                 public void keyReleased(KeyEvent e) {
                     float f = 0.0f;
                     if (!row.tfPrice.getText().equals("") && !row.tfQuantity.getText().equals("") && !row.tfQuantity.getText().equals(".")) {
-                        f = Float.valueOf(row.tfQuantity.getText()) * Float.valueOf(row.tfPrice.getText());
-                        row.tfAmount.setText(f + "");
-                    } else {
-                        row.tfAmount.setText(f + "");
-                    }
+                        f = Float.valueOf(row.tfQuantity.getText()) * Float.valueOf(row.tfPrice.getText());                       
+                    } 
+                    row.tfAmount.setText(f + "");
                     float fTotalAmountValue = 0.0f;
                     for (int i = 0; i < pnlParent.getComponentCount(); i++) {
                         String text = ((AddRow) pnlParent.getComponent(i)).tfAmount.getText();
@@ -577,7 +605,7 @@ public class CustomerBill extends javax.swing.JFrame {
                 }
 
                 @Override
-                public void keyTyped(KeyEvent e) {
+                public void keyTyped(KeyEvent e) {                    
                     if ((Character.isDigit(e.getKeyChar()) || e.getKeyChar() == '.' || e.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
                         if (e.getKeyChar() == '.') {
                             String text = row.tfQuantity.getText();

@@ -23,12 +23,12 @@ public class UpdateItemDetails extends javax.swing.JDialog {
     public UpdateItemDetails(ItemDetails  itemDetails) {
         initComponents();
         this.itemDetails = itemDetails;
-        tfItemNumber.setText(String.valueOf(itemDetails.getItemNumber()));
+        tfItemNumber.setText(String.valueOf(itemDetails.getItemNo()));
         tfItemCode.setText(itemDetails.getItemCode());
         tfItemName.setText(itemDetails.getItemName());
-        tfPurchasedPrice.setText(String.valueOf(itemDetails.getPurchasedPrice()));
-        tfItemPurchasedShop.setText(itemDetails.getPurchasedCompany());
-        tfItemSellPrice.setText(String.valueOf(itemDetails.getSalePrice()));
+        tfPurchasedPrice.setText(String.valueOf(itemDetails.getPurchasedRate()));
+        tfItemPurchasedShop.setText(itemDetails.getPurchasedShop());
+        tfItemSellPrice.setText(String.valueOf(itemDetails.getSellRate()));
         tfItemDetail.setText(itemDetails.getItemDetail());
     }
 
@@ -173,12 +173,12 @@ public class UpdateItemDetails extends javax.swing.JDialog {
     private void btnInsertItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertItemActionPerformed
         try {            
             int itemNumber = Integer.valueOf(tfItemNumber.getValue().toString());
-            itemDetails.setItemNumber(itemNumber);
+            itemDetails.setItemNo(itemNumber);
             itemDetails.setItemName(tfItemName.getText());
-            itemDetails.setPurchasedPrice(Float.valueOf(tfPurchasedPrice.getText()));
-            itemDetails.setPurchasedCompany(tfItemPurchasedShop.getText());
+            itemDetails.setPurchasedRate(Float.valueOf(tfPurchasedPrice.getText()));
+            itemDetails.setPurchasedShop(tfItemPurchasedShop.getText());
             float salePrice = Float.valueOf(tfItemSellPrice.getValue().toString());
-            itemDetails.setSalePrice(salePrice);
+            itemDetails.setSellRate(salePrice);
             itemDetails.setItemCode(tfItemCode.getText());
             itemDetails.setItemDetail(tfItemDetail.getText());
             int iresult = CustomerDataFactory.setItemDetails(itemDetails);

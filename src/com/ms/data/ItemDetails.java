@@ -12,110 +12,110 @@ package com.ms.data;
  */
 public class ItemDetails {
     
-    private int itemNumber;
-    private String itemName;
-    private float purchasedPrice;
-    private float salePrice;
-    private String purchasedCompany;
-    private String itemCode;
-    private String ItemDetail;
+    private int iItemNo;
+    private String strItemName;
+    private float fPurchaseRate;
+    private float fSellRate;
+    private String strPurchasedShop;
+    private String strItemCode;
+    private String strItemDetail;
 
     /**
      * @return the itemNumber
      */
-    public int getItemNumber() {
-        return itemNumber;
+    public int getItemNo() {
+        return iItemNo;
     }
 
     /**
      * @param itemNumber the itemNumber to set
      */
-    public void setItemNumber(int itemNumber) {
-        this.itemNumber = itemNumber;
+    public void setItemNo(int itemNumber) {
+        this.iItemNo = itemNumber;
     }
 
     /**
      * @return the itemName
      */
     public String getItemName() {
-        return itemName;
+        return strItemName;
     }
 
     /**
      * @param itemName the itemName to set
      */
     public void setItemName(String itemName) {
-        this.itemName = itemName;
+        this.strItemName = itemName;
     }
 
     /**
      * @return the purchasedPrice
      */
-    public float getPurchasedPrice() {
-        return purchasedPrice;
+    public float getPurchasedRate() {
+        return fPurchaseRate;
     }
 
     /**
      * @param purchasedPrice the purchasedPrice to set
      */
-    public void setPurchasedPrice(float purchasedPrice) {
-        this.purchasedPrice = purchasedPrice;
+    public void setPurchasedRate(float purchasedPrice) {
+        this.fPurchaseRate = purchasedPrice;
     }
 
     /**
      * @return the salePrice
      */
-    public float getSalePrice() {
-        return salePrice;
+    public float getSellRate() {
+        return fSellRate;
     }
 
     /**
      * @param salePrice the salePrice to set
      */
-    public void setSalePrice(float salePrice) {
-        this.salePrice = salePrice;
+    public void setSellRate(float salePrice) {
+        this.fSellRate = salePrice;
     }
 
     /**
      * @return the purchasedCompany
      */
-    public String getPurchasedCompany() {
-        return purchasedCompany;
+    public String getPurchasedShop() {
+        return strPurchasedShop;
     }
 
     /**
      * @param purchasedCompany the purchasedCompany to set
      */
-    public void setPurchasedCompany(String purchasedCompany) {
-        this.purchasedCompany = purchasedCompany;
+    public void setPurchasedShop(String purchasedCompany) {
+        this.strPurchasedShop = purchasedCompany;
     }
 
     /**
      * @return the itemCode
      */
     public String getItemCode() {
-        return itemCode;
+        return strItemCode;
     }
 
     /**
      * @param itemCode the itemCode to set
      */
     public void setItemCode(String itemCode) {
-        this.itemCode = itemCode;
+        this.strItemCode = itemCode;
     }
 
     /**
      * @return the ItemDetail
      */
     public String getItemDetail() {
-        return ItemDetail;
+        return strItemDetail;
     }
 
     /**
      * @param ItemDetail the ItemDetail to set
      */
     public void setItemDetail(String ItemDetail) {
-        this.ItemDetail = ItemDetail;
+        this.strItemDetail = ItemDetail;
     }
     
 }

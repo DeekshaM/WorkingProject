@@ -14,65 +14,65 @@ import java.util.Date;
  */
 public class Users {
     
-    private String userId;
-    private String password;
-    private String createdBy;
-    private Date updatedDateTime;
+    private String strUserId;
+    private String strPassword;
+    private String strCreatedBy;
+    private Date dtupdatedDate;
 
     /**
      * @return the userId
      */
     public String getUserId() {
-        return userId;
+        return strUserId;
     }
 
     /**
      * @param userId the userId to set
      */
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.strUserId = userId;
     }
 
     /**
      * @return the password
      */
     public String getPassword() {
-        return password;
+        return strPassword;
     }
 
     /**
      * @param password the password to set
      */
     public void setPassword(String password) {
-        this.password = password;
+        this.strPassword = password;
     }
 
     /**
      * @return the createdBy
      */
     public String getCreatedBy() {
-        return createdBy;
+        return strCreatedBy;
     }
 
     /**
      * @param createdBy the createdBy to set
      */
     public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+        this.strCreatedBy = createdBy;
     }
 
     /**
      * @return the updatedDateTime
      */
     public Date getUpdatedDateTime() {
-        return updatedDateTime;
+        return dtupdatedDate;
     }
 
     /**
      * @param updatedDateTime the updatedDateTime to set
      */
     public void setUpdatedDateTime(Date updatedDateTime) {
-        this.updatedDateTime = updatedDateTime;
+        this.dtupdatedDate = updatedDateTime;
     }
     
 }

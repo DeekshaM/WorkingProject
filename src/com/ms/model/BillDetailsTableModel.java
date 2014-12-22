@@ -56,22 +56,22 @@ public class BillDetailsTableModel extends AbstractTableModel{
 
     @Override
      public Object getValueAt(int row, int column) {
-         BillMain record = lstbillMain.get(row);
+         BillMain billMain = lstbillMain.get(row);
          switch (column) {
              case 0:
-                return record.getBillNo();
+                return billMain.getBillNo();
              case 1:
-                return record.getBillDate();
+                return billMain.getBillDate();
              case 2:
-                return record.getName();
+                return billMain.getName();
              case 3:
-                 return record.getMobileNumber();
+                 return billMain.getMobileNumber();
              case 4:
-                 return record.getTotalAmt();
+                 return billMain.getTotalAmt();
              case 5:
-                 return record.getReceivedAmt();
+                 return billMain.getReceivedAmt();
              case 6:
-                 return record.getCreatedBy();
+                 return billMain.getCreatedBy();
                  
              default:
                 return new Object();
@@ -80,28 +80,28 @@ public class BillDetailsTableModel extends AbstractTableModel{
 
     @Override
      public void setValueAt(Object value, int row, int column) {
-         BillMain record = lstbillMain.get(row);
+         BillMain billMain = lstbillMain.get(row);
          switch (column) {
              case 0:
-                record.setBillNo((int) value);
+                billMain.setBillNo((int) value);
                 break;
              case 1:
-                record.setBillDate((String)value);
+                billMain.setBillDate((String)value);
                 break;
              case 2:
-                record.setName((String)value);
+                billMain.setName((String)value);
                 break;
              case 3:
-                record.setMobileNumber((String)value);
+                billMain.setMobileNumber((String)value);
                  break;
              case 4:
-                 record.setTotalAmt((Float)value);
+                 billMain.setTotalAmt((Float)value);
                  break;
              case 5:
-                 record.setReceivedAmt((Float)value);
+                 billMain.setReceivedAmt((Float)value);
                  break;
              case 6:                 
-                 record.setCreatedBy((String)value);
+                 billMain.setCreatedBy((String)value);
                  break;                 
              default:
                 System.out.println("invalid index");

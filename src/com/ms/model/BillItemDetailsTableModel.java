@@ -52,20 +52,20 @@ public class BillItemDetailsTableModel extends AbstractTableModel{
 
     @Override
      public Object getValueAt(int row, int column) {
-         BillDetails record = lstBillDetails.get(row);
+         BillDetails billDetails = lstBillDetails.get(row);
          switch (column) { 
              case 0:
                  return "*";
              case 1:
-                return record.getItemName();
+                return billDetails.getItemName();
              case 2:
-                return record.getItemType();
+                return billDetails.getItemType();
              case 3:
-                 return record.getQuantity();
+                 return billDetails.getQuantity();
              case 4:
-                 return record.getPieceRate();
+                 return billDetails.getRate();
              case 5:
-                 return record.getAmount();                 
+                 return billDetails.getAmount();                 
              default:
                 return new Object();
          }
@@ -73,22 +73,22 @@ public class BillItemDetailsTableModel extends AbstractTableModel{
 
     @Override
      public void setValueAt(Object value, int row, int column) {
-         BillDetails record = lstBillDetails.get(row);
+         BillDetails billDetails = lstBillDetails.get(row);
          switch (column) {             
              case 1:
-                record.setItemName((String)value);
+                billDetails.setItemName((String)value);
                 break;
              case 2:
-                record.setItemType((String)value);
+                billDetails.setItemType((String)value);
                 break;
              case 3:
-                record.setQuantity((Float)value);
+                billDetails.setQuantity((Float)value);
                  break;
              case 4:
-                 record.setPieceRate((Float)value);
+                 billDetails.setRate((Float)value);
                  break;
              case 5:
-                 record.setAmount((Float)value);
+                 billDetails.setAmount((Float)value);
                  break;      
              default:
                 System.out.println("invalid index");

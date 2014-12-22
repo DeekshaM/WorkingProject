@@ -13,95 +13,95 @@ package com.ms.data;
 public class BillDetails {
         
     private int iNo;
-    private int billNumber;
-    private String itemName;
-    private String itemType;
-    private float quantity;
-    private float pieceRate;
-    private float amount;
+    private int ibillNumber;
+    private String strItemName;
+    private String strItemType;
+    private float fQuantity;
+    private float fRate;
+    private float fAmount;
 
     /**
      * @return the billNumber
      */
     public int getBillNumber() {
-        return billNumber;
+        return ibillNumber;
     }
 
     /**
      * @param billNumber the billNumber to set
      */
     public void setBillNumber(int billNumber) {
-        this.billNumber = billNumber;
+        this.ibillNumber = billNumber;
     }
 
     /**
      * @return the itemName
      */
     public String getItemName() {
-        return itemName;
+        return strItemName;
     }
 
     /**
      * @param itemName the itemName to set
      */
     public void setItemName(String itemName) {
-        this.itemName = itemName;
+        this.strItemName = itemName;
     }
 
     /**
      * @return the itemType
      */
     public String getItemType() {
-        return itemType;
+        return strItemType;
     }
 
     /**
      * @param itemType the itemType to set
      */
     public void setItemType(String itemType) {
-        this.itemType = itemType;
+        this.strItemType = itemType;
     }
 
     /**
      * @return the quantity
      */
     public float getQuantity() {
-        return quantity;
+        return fQuantity;
     }
 
     /**
      * @param quantity the quantity to set
      */
     public void setQuantity(float quantity) {
-        this.quantity = quantity;
+        this.fQuantity = quantity;
     }
 
     /**
      * @return the amount
      */
     public float getAmount() {
-        return amount;
+        return fAmount;
     }
 
     /**
      * @param amount the amount to set
      */
     public void setAmount(float amount) {
-        this.amount = amount;
+        this.fAmount = amount;
     }
 
     /**
      * @return the pieceRate
      */
-    public float getPieceRate() {
-        return pieceRate;
+    public float getRate() {
+        return fRate;
     }
 
     /**
      * @param pieceRate the pieceRate to set
      */
-    public void setPieceRate(float pieceRate) {
-        this.pieceRate = pieceRate;
+    public void setRate(float pieceRate) {
+        this.fRate = pieceRate;
     }
 
     /**

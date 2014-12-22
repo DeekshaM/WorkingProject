@@ -44,16 +44,15 @@ public class CustomerDataFactory {
 
     public static int setBillDetails(BillMain billDetails) throws ClassNotFoundException, SQLException {
         try (Connection con = ConnectionFactory.getConnection();) {
-            String strQuery = "INSERT INTO bill_main VALUES (?,?,?,?,?,?,?,?);";
+            String strQuery = "INSERT INTO bill_main VALUES (?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(strQuery);
             ps.setInt(1, billDetails.getBillNo());
             ps.setString(2, billDetails.getBillDate());
             ps.setString(3, billDetails.getName());
             ps.setString(4, billDetails.getMobileNumber());
             ps.setFloat(5, billDetails.getTotalAmt());
-            ps.setString(6, billDetails.getBillMainCol());
-            ps.setString(7, billDetails.getCreatedBy());
-            ps.setFloat(8, billDetails.getReceivedAmt());
+            ps.setString(6, billDetails.getCreatedBy());
+            ps.setFloat(7, billDetails.getReceivedAmt());
             return ps.executeUpdate();
         } catch (Exception e) {
             throw e;
@@ -70,7 +69,7 @@ public class CustomerDataFactory {
                 ps.setString(2, billItem.getItemType());
                 ps.setString(3, billItem.getItemName());
                 ps.setFloat(4, billItem.getQuantity());
-                ps.setDouble(5, billItem.getPieceRate());
+                ps.setDouble(5, billItem.getRate());
                 ps.setFloat(6, billItem.getAmount());
                 ps.addBatch();
             }
@@ -94,7 +93,7 @@ public class CustomerDataFactory {
                 billDetails.setItemName(rSet.getString("Item_Name"));
                 billDetails.setItemType(rSet.getString("Item_Type"));
                 billDetails.setQuantity(rSet.getFloat("Quantity"));
-                billDetails.setPieceRate(rSet.getFloat("Price_Rate"));
+                billDetails.setRate(rSet.getFloat("Price_Rate"));
                 billDetails.setAmount(rSet.getFloat("Amount"));
                 lstbillItems.add(billDetails);
             }
@@ -124,11 +123,11 @@ public class CustomerDataFactory {
         try (Connection con = ConnectionFactory.getConnection();) {
             String strQuery = "REPLACE INTO item_details VALUES (?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(strQuery);
-            ps.setInt(1, itemDetails.getItemNumber());
+            ps.setInt(1, itemDetails.getItemNo());
             ps.setString(2, itemDetails.getItemName());
-            ps.setFloat(3, itemDetails.getPurchasedPrice());
-            ps.setString(4, itemDetails.getPurchasedCompany());
-            ps.setFloat(5, itemDetails.getSalePrice());
+            ps.setFloat(3, itemDetails.getPurchasedRate());
+            ps.setString(4, itemDetails.getPurchasedShop());
+            ps.setFloat(5, itemDetails.getSellRate());
             ps.setString(6, itemDetails.getItemCode());
             ps.setString(7, itemDetails.getItemDetail());
             return ps.executeUpdate();
@@ -176,10 +175,10 @@ public class CustomerDataFactory {
                itemDetails.setItemCode(rSet.getString("Item_Code"));
                itemDetails.setItemDetail(rSet.getString("Item_detailscol"));
                itemDetails.setItemName(rSet.getString("Item_Name"));
-               itemDetails.setItemNumber(rSet.getInt("Item_Number"));
-               itemDetails.setPurchasedCompany(rSet.getString("Item_Purchased_Company"));
-               itemDetails.setPurchasedPrice(rSet.getFloat("Purchased_Price"));
-               itemDetails.setSalePrice(rSet.getFloat("Sale_Price"));
+               itemDetails.setItemNo(rSet.getInt("Item_Number"));
+               itemDetails.setPurchasedShop(rSet.getString("Item_Purchased_Company"));
+               itemDetails.setPurchasedRate(rSet.getFloat("Purchased_Price"));
+               itemDetails.setSellRate(rSet.getFloat("Sale_Price"));
                lstItems.add(itemDetails);
             }
         } catch (Exception e) {
@@ -214,10 +213,10 @@ public class CustomerDataFactory {
                 itemDetails.setItemCode(iResult.getString("Item_Code"));
                 itemDetails.setItemDetail(iResult.getString("Item_detailscol"));
                 itemDetails.setItemName(iResult.getString("Item_Name"));
-                itemDetails.setItemNumber(iResult.getInt("Item_Number"));
-                itemDetails.setPurchasedCompany(iResult.getString("Item_Purchased_Company"));
-                itemDetails.setPurchasedPrice(iResult.getFloat("Purchased_Price"));
-                itemDetails.setSalePrice(iResult.getFloat("sale_Price"));
+                itemDetails.setItemNo(iResult.getInt("Item_Number"));
+                itemDetails.setPurchasedShop(iResult.getString("Item_Purchased_Company"));
+                itemDetails.setPurchasedRate(iResult.getFloat("Purchased_Price"));
+                itemDetails.setSellRate(iResult.getFloat("sale_Price"));
             }
         } catch (Exception e) {
             throw e;
@@ -308,26 +307,4 @@ public class CustomerDataFactory {
         }
         return customerBillInfo;
     }
-
-    public static int getBillNumbers() throws ClassNotFoundException, SQLException, Exception {
-        int MaxBillNumber = 0;
-        ResultSet rs = null;
-
-        try (Connection con = ConnectionFactory.getConnection();) {
-//             CustomerDataFactory.getBLOBObject("netti",4,1313);
-//            byte[] data = lCDASectionsInfo.toByteArray();
-            String strQuery = "select MAX(BILL_NUMBER) from APP.CUSTOMER_BILL_DETAILS";
-            PreparedStatement ps = con.prepareStatement(strQuery);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                MaxBillNumber = rs.getInt(1);
-
-            }
-
-        } catch (Exception e) {
-            throw e;
-        }
-        return MaxBillNumber;
-    }
-
 }

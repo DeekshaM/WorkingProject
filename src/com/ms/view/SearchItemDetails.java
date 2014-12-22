@@ -193,9 +193,9 @@ public class SearchItemDetails extends javax.swing.JFrame {
             tfItemDetails.setText(itemDetail.getItemDetail());
             tfItemName.setText(itemDetail.getItemName());
             tfPriceCode.setText(itemDetail.getItemCode());
-            tfPurchaseCompany.setText(itemDetail.getPurchasedCompany());
-            tfPurchasePrice.setText(String.valueOf(itemDetail.getPurchasedPrice()));
-            tfSellPrice.setText(String.valueOf(itemDetail.getSalePrice()));
+            tfPurchaseCompany.setText(itemDetail.getPurchasedShop());
+            tfPurchasePrice.setText(String.valueOf(itemDetail.getPurchasedRate()));
+            tfSellPrice.setText(String.valueOf(itemDetail.getSellRate()));
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SearchItemDetails.class.getName()).log(Level.SEVERE, null, ex);
         }

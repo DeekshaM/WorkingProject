@@ -6,8 +6,6 @@
 
 package com.ms.data;
 
-import java.util.Date;
-
 /**
  *
  * @author Venugopal
@@ -15,11 +13,10 @@ import java.util.Date;
 public class BillMain {
     
     private int iBillNo;
-    private String dtBillDate;
+    private String strBillDate;
     private String strName;
-    private String dMobileNumber;
+    private String strMobileNo;
     private float fTotalAmt;
-    private String strBillMainCol;
     private String strCreatedBy;
     private float fReceivedAmt;
 
@@ -41,14 +38,14 @@ public class BillMain {
      * @return the dtBillDate
      */
     public String getBillDate() {
-        return dtBillDate;
+        return strBillDate;
     }
 
     /**
      * @param dtBillDate the dtBillDate to set
      */
     public void setBillDate(String dtBillDate) {
-        this.dtBillDate = dtBillDate;
+        this.strBillDate = dtBillDate;
     }
 
     /**
@@ -69,14 +66,14 @@ public class BillMain {
      * @return the dMobileNumber
      */
     public String getMobileNumber() {
-        return dMobileNumber;
+        return strMobileNo;
     }
 
     /**
      * @param dMobileNumber the dMobileNumber to set
      */
     public void setMobileNumber(String dMobileNumber) {
-        this.dMobileNumber = dMobileNumber;
+        this.strMobileNo = dMobileNumber;
     }
 
     /**
@@ -91,20 +88,6 @@ public class BillMain {
      */
     public void setTotalAmt(float fTotalAmt) {
         this.fTotalAmt = fTotalAmt;
-    }
-
-    /**
-     * @return the strBillMainCol
-     */
-    public String getBillMainCol() {
-        return strBillMainCol;
-    }
-
-    /**
-     * @param strBillMainCol the strBillMainCol to set
-     */
-    public void setBillMainCol(String strBillMainCol) {
-        this.strBillMainCol = strBillMainCol;
     }
 
     /**

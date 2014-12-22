@@ -186,19 +186,22 @@ public class ItemDetailsForm extends javax.swing.JFrame {
 
     private void btnInsertItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertItemActionPerformed
         try {
-            if(!tfItemNumber.getText().isEmpty() && !tfItemCode.getText().isEmpty()&& !tfItemDetail.getText().isEmpty() 
-                    && !tfItemName.getText().isEmpty() && !tfItemPurchasedShop.getText().isEmpty() && !tfItemSellPrice.getText().isEmpty()
-                    && !tfPurchasedPrice.getText().isEmpty()) {
+//            if(!tfItemNumber.getText().isEmpty() && !tfItemCode.getText().isEmpty()&& !tfItemDetail.getText().isEmpty() 
+//                    && !tfItemName.getText().isEmpty() && !tfItemPurchasedShop.getText().isEmpty() && !tfItemSellPrice.getText().isEmpty()
+//                    && !tfPurchasedPrice.getText().isEmpty()) {
+//                return;
+//            }
+            if(tfItemName.getText().isEmpty() && tfItemNumber.getText().isEmpty()) {
                 return;
             }
             itemDetails = new ItemDetails();
             int itemNumber = Integer.valueOf(tfItemNumber.getValue().toString());
-            itemDetails.setItemNumber(itemNumber);
+            itemDetails.setItemNo(itemNumber);
             itemDetails.setItemName(tfItemName.getText());
-            itemDetails.setPurchasedPrice(Float.valueOf(tfPurchasedPrice.getText()));
-            itemDetails.setPurchasedCompany(tfItemPurchasedShop.getText());
+            itemDetails.setPurchasedRate(Float.valueOf(tfPurchasedPrice.getText()));
+            itemDetails.setPurchasedShop(tfItemPurchasedShop.getText());
             float salePrice = Float.valueOf(tfItemSellPrice.getValue().toString());
-            itemDetails.setSalePrice(salePrice);
+            itemDetails.setSellRate(salePrice);
             itemDetails.setItemCode(tfItemCode.getText());
             itemDetails.setItemDetail(tfItemDetail.getText());
             int iresult = setItemDetails(itemDetails);

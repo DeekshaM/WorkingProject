@@ -6,6 +6,7 @@ package com.ms.view;
 
 import com.ms.util.AutoTextComplete;
 import com.ms.data.ItemDetails;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class AddRow extends javax.swing.JPanel {
 //               JOptionPane.showMessageDialog(this,"AddRow_AddRow \n Exception is Occured at Loading..... a File \n"+e.getMessage());
 //            }
         for(ItemDetails item : CustomerBill.lstItems) {
-            timesArray.add(item.getItemNumber()+", "+item.getItemName());
+            timesArray.add(item.getItemName());
         }
         AutoTextComplete atc = new AutoTextComplete(tfName);
         atc.setItems(timesArray);
@@ -113,6 +114,11 @@ public class AddRow extends javax.swing.JPanel {
                 tfTypeActionPerformed(evt);
             }
         });
+        tfType.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfTypeKeyPressed(evt);
+            }
+        });
 
         tfAmount.setEditable(false);
         tfAmount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.##"))));
@@ -173,10 +179,9 @@ public class AddRow extends javax.swing.JPanel {
     }//GEN-LAST:event_tfTypeActionPerformed
 
     private void tfNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNameActionPerformed
-        for(ItemDetails idetail: CustomerBill.lstItems) {
-            String[] strItemName = tfName.getText().split(", ");
-            if(String.valueOf(idetail.getItemNumber()).equals(strItemName[0].trim())) {
-                tfPrice.setValue(idetail.getSalePrice());
+        for(ItemDetails idetail: CustomerBill.lstItems) {            
+            if(String.valueOf(idetail.getItemNo()).equals(tfName.getText())) {
+                tfPrice.setValue(idetail.getSellRate());
             }
         }
     }//GEN-LAST:event_tfNameActionPerformed
@@ -184,6 +189,12 @@ public class AddRow extends javax.swing.JPanel {
     private void tfNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNameKeyReleased
         
     }//GEN-LAST:event_tfNameKeyReleased
+
+    private void tfTypeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTypeKeyPressed
+        if (!((evt.getKeyChar() == 'M' && evt.getKeyChar() == 'P' && evt.getKeyChar() == 'D' && evt.getKeyChar() == 'T') || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfTypeKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenuItem popAdd;
