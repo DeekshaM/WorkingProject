@@ -11,7 +11,6 @@ import com.ms.data.ItemDetails;
 import com.ms.datafactory.CustomerDataFactory;
 import static com.ms.datafactory.CustomerDataFactory.getValidUser;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
@@ -26,10 +25,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import javax.swing.text.AbstractDocument;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
 /**
@@ -44,26 +40,25 @@ public class CustomerBill extends javax.swing.JFrame {
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     Date date = new Date();
     List<String> lstUserDetails;
-    DocumentFilter filter = new UppercaseDocumentFilter();
+    DocumentFilter filter = new com.ms.util.UppercaseDocumentFilter();
     public static List<ItemDetails> lstItems;
     private List<BillDetails> lstOfTableInfo;
     private BillMain billDetails;
+    public static final int defaultRowCount = 10;
 
-    public CustomerBill() throws ClassNotFoundException, SQLException, Exception {
-        setUIFont(new javax.swing.plaf.FontUIResource("Verdana", Font.PLAIN, 11));
+    public CustomerBill() throws ClassNotFoundException, SQLException, Exception {        
         initComponents();
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(new MyDispatcher());
         int componentCount = pnlParent.getComponentCount();
         lstItems = CustomerDataFactory.getItems();
-        addDetails(componentCount + 1, 5);
+        addDetails(componentCount + 1, defaultRowCount);
         lblDate.setText(dateFormat.format(date) + "");
         lblCustomerBno.setText(String.valueOf(CustomerDataFactory.getBillNo()+1));
         lstUserDetails = getValidUser("venu", "venugopal");
         if (lstUserDetails.isEmpty()) {
             JOptionPane.showMessageDialog(this, "UserName or Password wrong", "LoginUser", JOptionPane.INFORMATION_MESSAGE);
-        }
-        
+        }        
     }
 
     /**
@@ -90,7 +85,6 @@ public class CustomerBill extends javax.swing.JFrame {
         lblTotalName = new javax.swing.JLabel();
         btnPrint = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
-        btnRemove = new javax.swing.JButton();
         tfRecivedAmt = new javax.swing.JTextField();
         btnDone = new javax.swing.JButton();
         btnNewBill = new javax.swing.JButton();
@@ -113,10 +107,15 @@ public class CustomerBill extends javax.swing.JFrame {
         setTitle("Customer Bill");
         setMaximumSize(new java.awt.Dimension(250, 160));
         setMinimumSize(new java.awt.Dimension(250, 160));
-        setPreferredSize(new java.awt.Dimension(530, 135));
+        setPreferredSize(new java.awt.Dimension(530, 345));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
+            }
+        });
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
             }
         });
 
@@ -127,6 +126,7 @@ public class CustomerBill extends javax.swing.JFrame {
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         pnlParent.setBackground(new java.awt.Color(255, 255, 255));
+        pnlParent.setPreferredSize(new java.awt.Dimension(100, 100));
         pnlParent.setLayout(new javax.swing.BoxLayout(pnlParent, javax.swing.BoxLayout.Y_AXIS));
         jPanel2.add(pnlParent, java.awt.BorderLayout.CENTER);
 
@@ -152,9 +152,9 @@ public class CustomerBill extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
-                .addComponent(jLabel8)
-                .addGap(30, 30, 30)
+                .addGap(79, 79, 79)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(42, 42, 42)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,17 +208,6 @@ public class CustomerBill extends javax.swing.JFrame {
             }
         });
 
-        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/ms/images/remove.png"))); // NOI18N
-        btnRemove.setMnemonic('R');
-        btnRemove.setToolTipText("Remove Item Row");
-        btnRemove.setBorder(null);
-        btnRemove.setContentAreaFilled(false);
-        btnRemove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoveActionPerformed(evt);
-            }
-        });
-
         tfRecivedAmt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfRecivedAmtActionPerformed(evt);
@@ -267,9 +256,7 @@ public class CustomerBill extends javax.swing.JFrame {
                 .addComponent(btnNewBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAdd)
-                .addGap(4, 4, 4)
-                .addComponent(btnRemove)
-                .addGap(4, 4, 4)
+                .addGap(25, 25, 25)
                 .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(btnDone)
@@ -290,7 +277,6 @@ public class CustomerBill extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnDone)
                     .addComponent(btnPrint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRemove, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblTotalName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -344,7 +330,7 @@ public class CustomerBill extends javax.swing.JFrame {
 
         lblName.setText("Name :");
 
-        lblBno.setText("B.No  :");
+        lblBno.setText("B.No :");
 
         jLabel6.setText("Date :");
 
@@ -415,9 +401,7 @@ public class CustomerBill extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-        //PrintUtilities.printComponent(pnlAll);
-        new PrintMultipleTables(lstOfTableInfo, billDetails);
-        
+        new PrintMultipleTables(lstOfTableInfo, billDetails);        
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void setDataInDB() {
@@ -471,11 +455,6 @@ public class CustomerBill extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Please Enter Item name", "Item Name can't be blank"+ i+1, JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
-//                tableInfo.setNo(Integer.valueOf(((AddRow) pnlParent.getComponent(i)).tfNo.getText().trim()));
-//                tableInfo.setBillNumber(Integer.valueOf(lblCustomerBno.getText()));                
-//                tableInfo.setItemType(((AddRow) pnlParent.getComponent(i)).tfType.getText());
-//                tableInfo.setAmount(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfAmount.getText()));
-//                lstOfTableInfo.add(tableInfo);
             }
             if (lstOfTableInfo.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please Enter Item Details", "Item Details Can't be blank", JOptionPane.INFORMATION_MESSAGE);
@@ -495,27 +474,19 @@ public class CustomerBill extends javax.swing.JFrame {
             btnPrint.setEnabled(true);
             JOptionPane.showMessageDialog(this, "Bill Successfully Inserted in DB", "Bill Inserted Successfully", JOptionPane.INFORMATION_MESSAGE);
             btnDone.setEnabled(false);
-            btnAdd.setEnabled(false);
-            btnRemove.setEnabled(false);
+            btnAdd.setEnabled(false);            
             btnNewBill.setEnabled(true);
         } catch (HeadlessException | NumberFormatException | ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }
-
     }
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        int iComp = pnlParent.getComponentCount();
-        if (iComp < 30) {
-            addDetails(iComp + 1, 1);
-        }
+        addDetails(pnlParent.getComponentCount() + 1, 1);
+        setWidth();
     }//GEN-LAST:event_btnAddActionPerformed
-
-    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        removeDetails();
-    }//GEN-LAST:event_btnRemoveActionPerformed
     private void removeDetails() {
-        if(pnlParent.getComponentCount() > 5) {
-            for (int iCount = pnlParent.getComponentCount() - 1; iCount >= 5; iCount--) {
+        if(pnlParent.getComponentCount() > defaultRowCount) {
+            for (int iCount = pnlParent.getComponentCount() - 1; iCount >= defaultRowCount; iCount--) {
                 AddRow row = ((AddRow) pnlParent.getComponent(iCount));
                 if (row.tfName.getText().equals("") && row.tfQuantity.getText().equals("") && row.tfPrice.getText().equals("")) {
                     pnlParent.remove(iCount);
@@ -529,18 +500,14 @@ public class CustomerBill extends javax.swing.JFrame {
                 AddRow row = ((AddRow) pnlParent.getComponent(i));
                 row.tfNo.setText(" " + (i + 1) + " ");
             }
-            int iHeight = 5 * 19 + 6;
+            int iHeight = defaultRowCount * 19 + 6;
             pnlParent.setPreferredSize(new Dimension(654, pnlParent.getHeight() - iHeight));
             pnlParent.setMaximumSize(new Dimension(654, pnlParent.getHeight() - iHeight));
             this.setSize(this.getWidth(), this.getHeight() - iHeight);
-//            pnlParent.validate();
-//            pnlParent.repaint();
-//            this.validate();
-//            this.repaint();
         }
     }
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-//        System.out.println(this.getHeight());
+        System.out.println(this.getWidth()+",   "+this.getHeight());
     }//GEN-LAST:event_formComponentResized
 
     private void tfMobileNumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfMobileNumKeyTyped
@@ -577,15 +544,15 @@ public class CustomerBill extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tfRecivedAmtKeyTyped
 
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        
+    }//GEN-LAST:event_formWindowStateChanged
+
     private void addDetails(int iComp, int add) {
         for (int i = iComp; i < iComp + add; i++) {
             final AddRow row = new AddRow();
-            row.tfNo.setText(" " + i + " ");
-            if (pnlParent.getComponentCount() != 30) {
-                pnlParent.add(row);
-            } else {
-                break;
-            }
+            row.tfNo.setValue(i);            
+             pnlParent.add(row);
             row.tfQuantity.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyReleased(KeyEvent e) {
@@ -656,74 +623,13 @@ public class CustomerBill extends javax.swing.JFrame {
                 }
             });
         }
-        setWidth(add);
+        
     }
 
-    public void setWidth(int add) {
-        pnlParent.setPreferredSize(new Dimension(654, add * 16 + 5));
-        pnlParent.setMaximumSize(new Dimension(654, add * 16 + 5));
-        jPanel2.setPreferredSize(new Dimension(654, add * 16 + 5));
-        jPanel2.setMaximumSize(new Dimension(654, add * 16 + 5));
-        this.setSize(this.getWidth(), this.getHeight() + add * 16 + 4);
-        pnlParent.validate();
-        pnlParent.repaint();
-        this.validate();
-        this.repaint();
+    public void setWidth() {
+        this.setSize(this.getWidth(), this.getHeight() + 16 + defaultRowCount - 6);        
     }
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Metal".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(ResearchTable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(ResearchTable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(ResearchTable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(ResearchTable.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    new ResearchTable().setVisible(true);
-//                } catch (ClassNotFoundException ex) {
-//                    Logger.getLogger(ResearchTable.class.getName()).log(Level.SEVERE, null, ex);
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(ResearchTable.class.getName()).log(Level.SEVERE, null, ex);
-//                } catch (Exception ex) {
-//                    Logger.getLogger(ResearchTable.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        });
-//    }
-
-    private static void setUIFont(javax.swing.plaf.FontUIResource f) {
-        java.util.Enumeration keys = UIManager.getDefaults().keys();
-        while (keys.hasMoreElements()) {
-            Object key = keys.nextElement();
-            Object value = UIManager.get(key);
-            if (value instanceof javax.swing.plaf.FontUIResource) {
-                UIManager.put(key, f);
-            }
-        }
-    }
 
     private class MyDispatcher implements KeyEventDispatcher {
 
@@ -734,9 +640,8 @@ public class CustomerBill extends javax.swing.JFrame {
             } else if (e.getID() == KeyEvent.KEY_RELEASED) {
                 if (e.getKeyCode() == KeyEvent.VK_F1) {
                     int iComp = pnlParent.getComponentCount();
-                    if (iComp < 30) {
-                        addDetails(iComp + 1, 1);
-                    }
+                    addDetails(iComp + 1, 1);
+                    setWidth();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_F2) {
                     removeDetails();
@@ -759,7 +664,6 @@ public class CustomerBill extends javax.swing.JFrame {
     private javax.swing.JButton btnDone;
     private javax.swing.JButton btnNewBill;
     private javax.swing.JButton btnPrint;
-    private javax.swing.JButton btnRemove;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -792,16 +696,3 @@ public class CustomerBill extends javax.swing.JFrame {
 
 }
 
-class UppercaseDocumentFilter extends DocumentFilter {
-  public void insertString(DocumentFilter.FilterBypass fb, int offset, String text,
-      AttributeSet attr) throws BadLocationException {
-
-    fb.insertString(offset, text.toUpperCase(), attr);
-  }
-
-  public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text,
-      AttributeSet attrs) throws BadLocationException {
-
-    fb.replace(offset, length, text.toUpperCase(), attrs);
-  }
-} 

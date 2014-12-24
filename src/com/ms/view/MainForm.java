@@ -5,9 +5,11 @@
  */
 package com.ms.view;
 
+import java.awt.Font;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.UIManager;
 
 /**
  *
@@ -19,6 +21,7 @@ public class MainForm extends javax.swing.JFrame {
      * Creates new form MainForm
      */
     public MainForm() {
+        setUIFont(new javax.swing.plaf.FontUIResource("Verdana", Font.PLAIN, 11));
         initComponents();
     }
 
@@ -188,6 +191,17 @@ public class MainForm extends javax.swing.JFrame {
                 new MainForm().setVisible(true);
             }
         });
+    }
+    
+    private static void setUIFont(javax.swing.plaf.FontUIResource f) {
+        java.util.Enumeration keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof javax.swing.plaf.FontUIResource) {
+                UIManager.put(key, f);
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

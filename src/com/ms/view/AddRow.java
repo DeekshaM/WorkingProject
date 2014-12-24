@@ -6,10 +6,11 @@ package com.ms.view;
 
 import com.ms.util.AutoTextComplete;
 import com.ms.data.ItemDetails;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.DocumentFilter;
 
 /**
  *
@@ -21,6 +22,7 @@ public class AddRow extends javax.swing.JPanel {
      * Creates new form AddRow
      */
     List<String> timesArray = new ArrayList<>();
+    DocumentFilter filter = new com.ms.util.UppercaseDocumentFilter();
     public AddRow() {
         initComponents();
 //        try {
@@ -53,10 +55,10 @@ public class AddRow extends javax.swing.JPanel {
         popAdd = new javax.swing.JMenuItem();
         tfName = new javax.swing.JTextField();
         tfQuantity = new javax.swing.JTextField();
-        tfNo = new javax.swing.JTextField();
         tfType = new javax.swing.JTextField();
         tfAmount = new javax.swing.JFormattedTextField();
         tfPrice = new javax.swing.JFormattedTextField();
+        tfNo = new javax.swing.JFormattedTextField();
 
         popAdd.setText("Add Item Name");
         popAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -99,13 +101,7 @@ public class AddRow extends javax.swing.JPanel {
             }
         });
 
-        tfNo.setEditable(false);
-        tfNo.setBackground(new java.awt.Color(255, 255, 255));
-        tfNo.setText("1");
-        tfNo.setFocusable(false);
-        tfNo.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        tfNo.setMinimumSize(new java.awt.Dimension(6, 19));
-
+        ((AbstractDocument) tfType.getDocument()).setDocumentFilter(filter);
         tfType.setText("P");
         tfType.setMargin(new java.awt.Insets(0, 0, 0, 0));
         tfType.setPreferredSize(new java.awt.Dimension(8, 20));
@@ -118,20 +114,31 @@ public class AddRow extends javax.swing.JPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tfTypeKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfTypeKeyTyped(evt);
+            }
         });
 
         tfAmount.setEditable(false);
+        tfAmount.setBackground(new java.awt.Color(255, 255, 255));
         tfAmount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.##"))));
+        tfAmount.setFocusable(false);
+        tfAmount.setRequestFocusEnabled(false);
 
         tfPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.##"))));
         tfPrice.setPreferredSize(new java.awt.Dimension(69, 20));
+
+        tfNo.setEditable(false);
+        tfNo.setBackground(new java.awt.Color(255, 255, 255));
+        tfNo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("##"))));
+        tfNo.setFocusable(false);
+        tfNo.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addComponent(tfNo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,12 +156,12 @@ public class AddRow extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -191,17 +198,21 @@ public class AddRow extends javax.swing.JPanel {
     }//GEN-LAST:event_tfNameKeyReleased
 
     private void tfTypeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTypeKeyPressed
-        if (!((evt.getKeyChar() == 'M' && evt.getKeyChar() == 'P' && evt.getKeyChar() == 'D' && evt.getKeyChar() == 'T') || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+
+    }//GEN-LAST:event_tfTypeKeyPressed
+
+    private void tfTypeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTypeKeyTyped
+        if(tfType.getText().length() >= 1) {
             evt.consume();
         }
-    }//GEN-LAST:event_tfTypeKeyPressed
+    }//GEN-LAST:event_tfTypeKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenuItem popAdd;
     public javax.swing.JPopupMenu popUpConfiguration;
     public javax.swing.JFormattedTextField tfAmount;
     public javax.swing.JTextField tfName;
-    public javax.swing.JTextField tfNo;
+    public javax.swing.JFormattedTextField tfNo;
     public javax.swing.JFormattedTextField tfPrice;
     public javax.swing.JTextField tfQuantity;
     public javax.swing.JTextField tfType;

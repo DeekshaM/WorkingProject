@@ -142,11 +142,11 @@ public class PrintMultipleTables extends javax.swing.JFrame {
 
         jLabel15.setText("HiTech City, Madhapur, Hyderabad");
 
-        jLabel16.setText("Mobile No. :");
+        jLabel16.setText("Mobile No :");
 
         jLabel17.setText(" Name :");
 
-        jLabel18.setText("Bill No. :");
+        jLabel18.setText("Bill No :");
 
         lblcustomerbillNo.setText("jLabel11");
 
@@ -199,15 +199,12 @@ public class PrintMultipleTables extends javax.swing.JFrame {
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel16)
-                            .addComponent(lblCustomerMobileNo))
-                        .addGap(6, 6, 6))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(lblcustomerName)
-                        .addGap(6, 6, 6)))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel17)
+                        .addComponent(jLabel16)
+                        .addComponent(lblCustomerMobileNo))
+                    .addComponent(lblcustomerName, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(6, 6, 6)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(jLabel20)
@@ -277,11 +274,11 @@ public class PrintMultipleTables extends javax.swing.JFrame {
 
         jLabel3.setText(" Name :");
 
-        jLabel5.setText("Bill No. :");
+        jLabel5.setText("Bill No :");
 
         jLabel7.setText("HiTech City, Madhapur, Hyderabad");
 
-        jLabel8.setText("Mobile No. :");
+        jLabel8.setText("Mobile No :");
 
         jLabel9.setText("Date :");
 
@@ -366,7 +363,6 @@ public class PrintMultipleTables extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void setTableData(List<BillDetails> lstOfTableInfo) {
-        System.out.println(this.getWidth()+", "+this.getHeight());
         lblcustomerName.setText(billDetails.getName());
         lblCustomerMobileNo.setText(billDetails.getMobileNumber());
         lblcustomerbillNo.setText(String.valueOf(billDetails.getBillNo()));
