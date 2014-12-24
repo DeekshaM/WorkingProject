@@ -23,6 +23,7 @@ public class AddRow extends javax.swing.JPanel {
      */
     List<String> timesArray = new ArrayList<>();
     DocumentFilter filter = new com.ms.util.UppercaseDocumentFilter();
+
     public AddRow() {
         initComponents();
 //        try {
@@ -35,7 +36,7 @@ public class AddRow extends javax.swing.JPanel {
 //            } catch (Exception e) {
 //               JOptionPane.showMessageDialog(this,"AddRow_AddRow \n Exception is Occured at Loading..... a File \n"+e.getMessage());
 //            }
-        for(ItemDetails item : CustomerBill.lstItems) {
+        for (ItemDetails item : CustomerBill.lstItems) {
             timesArray.add(item.getItemName());
         }
         AutoTextComplete atc = new AutoTextComplete(tfName);
@@ -98,6 +99,11 @@ public class AddRow extends javax.swing.JPanel {
         tfQuantity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfQuantityActionPerformed(evt);
+            }
+        });
+        tfQuantity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfQuantityKeyReleased(evt);
             }
         });
 
@@ -170,9 +176,8 @@ public class AddRow extends javax.swing.JPanel {
     }//GEN-LAST:event_popAddActionPerformed
 
     private void tfNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNameMouseClicked
-        
-        if(evt.getButton()==MouseEvent.BUTTON3)
-        {
+
+        if (evt.getButton() == MouseEvent.BUTTON3) {
             popUpConfiguration.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_tfNameMouseClicked
@@ -186,15 +191,18 @@ public class AddRow extends javax.swing.JPanel {
     }//GEN-LAST:event_tfTypeActionPerformed
 
     private void tfNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNameActionPerformed
-        for(ItemDetails idetail: CustomerBill.lstItems) {            
-            if(String.valueOf(idetail.getItemNo()).equals(tfName.getText())) {
-                tfPrice.setValue(idetail.getSellRate());
+        String strItem = tfName.getText();
+        if (!strItem.isEmpty()) {
+            for (ItemDetails idetail : CustomerBill.lstItems) {
+                if (idetail.getItemName().equals(strItem)) {
+                    tfPrice.setValue(idetail.getSellRate());
+                }
             }
         }
     }//GEN-LAST:event_tfNameActionPerformed
 
     private void tfNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNameKeyReleased
-        
+
     }//GEN-LAST:event_tfNameKeyReleased
 
     private void tfTypeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTypeKeyPressed
@@ -202,10 +210,14 @@ public class AddRow extends javax.swing.JPanel {
     }//GEN-LAST:event_tfTypeKeyPressed
 
     private void tfTypeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTypeKeyTyped
-        if(tfType.getText().length() >= 1) {
+        if (tfType.getText().length() >= 1) {
             evt.consume();
         }
     }//GEN-LAST:event_tfTypeKeyTyped
+
+    private void tfQuantityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfQuantityKeyReleased
+        
+    }//GEN-LAST:event_tfQuantityKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JMenuItem popAdd;
