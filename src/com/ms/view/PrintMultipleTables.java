@@ -97,6 +97,7 @@ public class PrintMultipleTables extends javax.swing.JFrame {
 
             }
         ));
+        jTable1.setShowVerticalLines(false);
         jScrollPane1.setViewportView(jTable1);
 
         jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -117,10 +118,10 @@ public class PrintMultipleTables extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel25)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                 .addComponent(jLabel22)
-                .addGap(18, 18, 18)
-                .addComponent(lblCustomerTotalAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(lblCustomerTotalAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -187,7 +188,7 @@ public class PrintMultipleTables extends javax.swing.JFrame {
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel15)
-                        .addGap(0, 21, Short.MAX_VALUE)))
+                        .addGap(0, 11, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -230,6 +231,7 @@ public class PrintMultipleTables extends javax.swing.JFrame {
 
             }
         ));
+        jTable2.setShowVerticalLines(false);
         jScrollPane2.setViewportView(jTable2);
 
         jPanel6.add(jScrollPane2, java.awt.BorderLayout.CENTER);
@@ -250,10 +252,10 @@ public class PrintMultipleTables extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel26)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                 .addComponent(jLabel12)
-                .addGap(18, 18, 18)
-                .addComponent(lblTotalAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(lblTotalAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -319,7 +321,7 @@ public class PrintMultipleTables extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7)
-                        .addGap(0, 21, Short.MAX_VALUE)))
+                        .addGap(0, 11, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -352,7 +354,7 @@ public class PrintMultipleTables extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 881, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,7 +381,7 @@ public class PrintMultipleTables extends javax.swing.JFrame {
         jTable1.setModel(printbillModel);
         jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(20);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(206);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(207);
         jTable1.getColumnModel().getColumn(2).setPreferredWidth(35);
         jTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
         jTable1.getColumnModel().getColumn(4).setPreferredWidth(60);
@@ -387,7 +389,7 @@ public class PrintMultipleTables extends javax.swing.JFrame {
         jTable2.setModel(printbillModel);
         jTable2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         jTable2.getColumnModel().getColumn(0).setPreferredWidth(20);
-        jTable2.getColumnModel().getColumn(1).setPreferredWidth(206);
+        jTable2.getColumnModel().getColumn(1).setPreferredWidth(207);
         jTable2.getColumnModel().getColumn(2).setPreferredWidth(35);
         jTable2.getColumnModel().getColumn(3).setPreferredWidth(50);
         jTable2.getColumnModel().getColumn(4).setPreferredWidth(60);
