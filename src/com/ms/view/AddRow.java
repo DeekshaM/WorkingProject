@@ -6,6 +6,7 @@ package com.ms.view;
 
 import com.ms.util.AutoTextComplete;
 import com.ms.data.ItemDetails;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +24,10 @@ public class AddRow extends javax.swing.JPanel {
      */
     List<String> timesArray = new ArrayList<>();
     DocumentFilter filter = new com.ms.util.UppercaseDocumentFilter();
-
-    public AddRow() {
+    CustomerBill customerBill;
+    
+    public AddRow(CustomerBill customerBill) {
+        this.customerBill = customerBill;
         initComponents();
 //        try {
 //                File file = new File("D:\\Tomaggo\\TestProject\\WorkingProject\\src\\com\\td\\task\\DictAllWords.txt");
@@ -62,11 +65,6 @@ public class AddRow extends javax.swing.JPanel {
         tfNo = new javax.swing.JFormattedTextField();
 
         popAdd.setText("Add Item Name");
-        popAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                popAddActionPerformed(evt);
-            }
-        });
         popUpConfiguration.add(popAdd);
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -96,29 +94,23 @@ public class AddRow extends javax.swing.JPanel {
         tfQuantity.setMargin(new java.awt.Insets(0, 0, 0, 0));
         tfQuantity.setMinimumSize(new java.awt.Dimension(6, 19));
         tfQuantity.setPreferredSize(new java.awt.Dimension(2, 20));
-        tfQuantity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfQuantityActionPerformed(evt);
-            }
-        });
         tfQuantity.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfQuantityKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfQuantityKeyTyped(evt);
+            }
         });
 
         ((AbstractDocument) tfType.getDocument()).setDocumentFilter(filter);
+        tfType.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfType.setText("P");
         tfType.setMargin(new java.awt.Insets(0, 0, 0, 0));
         tfType.setPreferredSize(new java.awt.Dimension(8, 20));
-        tfType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfTypeActionPerformed(evt);
-            }
-        });
         tfType.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tfTypeKeyPressed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfTypeKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfTypeKeyTyped(evt);
@@ -133,6 +125,14 @@ public class AddRow extends javax.swing.JPanel {
 
         tfPrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.##"))));
         tfPrice.setPreferredSize(new java.awt.Dimension(69, 20));
+        tfPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfPriceKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfPriceKeyTyped(evt);
+            }
+        });
 
         tfNo.setEditable(false);
         tfNo.setBackground(new java.awt.Color(255, 255, 255));
@@ -171,24 +171,11 @@ public class AddRow extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void popAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popAddActionPerformed
-
-    }//GEN-LAST:event_popAddActionPerformed
-
     private void tfNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNameMouseClicked
-
         if (evt.getButton() == MouseEvent.BUTTON3) {
             popUpConfiguration.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_tfNameMouseClicked
-
-    private void tfQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfQuantityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfQuantityActionPerformed
-
-    private void tfTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTypeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfTypeActionPerformed
 
     private void tfNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNameActionPerformed
         String strItem = tfName.getText();
@@ -202,12 +189,10 @@ public class AddRow extends javax.swing.JPanel {
     }//GEN-LAST:event_tfNameActionPerformed
 
     private void tfNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNameKeyReleased
-
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            tfName.transferFocus();
+        }
     }//GEN-LAST:event_tfNameKeyReleased
-
-    private void tfTypeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTypeKeyPressed
-
-    }//GEN-LAST:event_tfTypeKeyPressed
 
     private void tfTypeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTypeKeyTyped
         if (tfType.getText().length() >= 1) {
@@ -216,12 +201,72 @@ public class AddRow extends javax.swing.JPanel {
     }//GEN-LAST:event_tfTypeKeyTyped
 
     private void tfQuantityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfQuantityKeyReleased
-        
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            tfQuantity.transferFocus();
+        }
+        if (!((evt.getKeyChar() >= '0' && evt.getKeyChar() <= '9') || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) || evt.getKeyChar() == '.') {
+            evt.consume();
+        }
+        float f = 0.0f;
+        if (!tfPrice.getText().equals("") && !tfQuantity.getText().equals("") && !tfQuantity.getText().equals(".")) {
+            f = Float.valueOf(tfQuantity.getText()) * Float.valueOf(tfPrice.getText());
+        }
+        tfAmount.setText(f + "");
+        customerBill.setTotalAmount();
     }//GEN-LAST:event_tfQuantityKeyReleased
 
+    private void tfPriceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPriceKeyTyped
+        if ((Character.isDigit(evt.getKeyChar()) || evt.getKeyChar() == '.' || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            if (evt.getKeyChar() == '.') {
+                String text = tfPrice.getText();
+                int indexOf = text.indexOf('.', 0);
+                if (indexOf != -1) {
+                    evt.consume();
+                }
+            }
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfPriceKeyTyped
+
+    private void tfPriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPriceKeyReleased
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            tfPrice.transferFocus();
+        }
+        if (!((evt.getKeyChar() >= '0' && evt.getKeyChar() <= '9') || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) || evt.getKeyChar() == '.') {
+            evt.consume();
+        }
+        float f = 0.0f;
+        if (!tfQuantity.getText().equals("") && !tfPrice.getText().equals("") && !tfPrice.getText().equals(".")) {
+            f = Float.valueOf(tfQuantity.getText()) * Float.valueOf(tfPrice.getText());
+        }
+        tfAmount.setText(f + "");
+        customerBill.setTotalAmount();
+    }//GEN-LAST:event_tfPriceKeyReleased
+
+    private void tfQuantityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfQuantityKeyTyped
+        if ((Character.isDigit(evt.getKeyChar()) || evt.getKeyChar() == '.' || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
+            if (evt.getKeyChar() == '.') {
+                String text = tfQuantity.getText();
+                int indexOf = text.indexOf('.', 0);
+                if (indexOf != -1) {
+                    evt.consume();
+                }
+            }
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfQuantityKeyTyped
+
+    private void tfTypeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTypeKeyReleased
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            tfType.transferFocus();
+        }
+    }//GEN-LAST:event_tfTypeKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JMenuItem popAdd;
-    public javax.swing.JPopupMenu popUpConfiguration;
+    private javax.swing.JMenuItem popAdd;
+    private javax.swing.JPopupMenu popUpConfiguration;
     public javax.swing.JFormattedTextField tfAmount;
     public javax.swing.JTextField tfName;
     public javax.swing.JFormattedTextField tfNo;

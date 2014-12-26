@@ -10,11 +10,9 @@ import com.ms.data.BillMain;
 import com.ms.data.ItemDetails;
 import com.ms.datafactory.CustomerDataFactory;
 import static com.ms.datafactory.CustomerDataFactory.getValidUser;
-import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -45,20 +43,27 @@ public class CustomerBill extends javax.swing.JFrame {
     private List<BillDetails> lstOfTableInfo;
     private BillMain billDetails;
     public static final int defaultRowCount = 10;
+    public static float fTotalAmount;
 
-    public CustomerBill() throws ClassNotFoundException, SQLException, Exception {        
+    public CustomerBill() throws ClassNotFoundException, SQLException, Exception {
         initComponents();
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(new MyDispatcher());
         int componentCount = pnlParent.getComponentCount();
         lstItems = CustomerDataFactory.getItems();
+        setHeader();
         addDetails(componentCount + 1, defaultRowCount);
-        lblDate.setText(dateFormat.format(date) + "");
-        lblCustomerBno.setText(String.valueOf(CustomerDataFactory.getBillNo()+1));
+        lblDate.setText(dateFormat.format(date));
+        lblCustomerBno.setText(String.valueOf(CustomerDataFactory.getBillNo() + 1));
         lstUserDetails = getValidUser("venu", "venugopal");
         if (lstUserDetails.isEmpty()) {
             JOptionPane.showMessageDialog(this, "UserName or Password wrong", "LoginUser", JOptionPane.INFORMATION_MESSAGE);
-        }        
+        }
+    }
+
+    private void setHeader() {
+        HeaderRow header = new HeaderRow();
+        pnlParent.add(header);
     }
 
     /**
@@ -73,13 +78,6 @@ public class CustomerBill extends javax.swing.JFrame {
         pnlAll = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         pnlParent = new javax.swing.JPanel();
-        pnlHeader = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblTotalAmount = new javax.swing.JLabel();
         lblTotalName = new javax.swing.JLabel();
@@ -107,17 +105,7 @@ public class CustomerBill extends javax.swing.JFrame {
         setTitle("Customer Bill");
         setMaximumSize(new java.awt.Dimension(250, 160));
         setMinimumSize(new java.awt.Dimension(250, 160));
-        setPreferredSize(new java.awt.Dimension(530, 345));
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                formComponentResized(evt);
-            }
-        });
-        addWindowStateListener(new java.awt.event.WindowStateListener() {
-            public void windowStateChanged(java.awt.event.WindowEvent evt) {
-                formWindowStateChanged(evt);
-            }
-        });
+        setPreferredSize(new java.awt.Dimension(527, 363));
 
         pnlAll.setPreferredSize(new java.awt.Dimension(320, 444));
         pnlAll.setLayout(new java.awt.BorderLayout());
@@ -129,54 +117,6 @@ public class CustomerBill extends javax.swing.JFrame {
         pnlParent.setPreferredSize(new java.awt.Dimension(100, 100));
         pnlParent.setLayout(new javax.swing.BoxLayout(pnlParent, javax.swing.BoxLayout.Y_AXIS));
         jPanel2.add(pnlParent, java.awt.BorderLayout.CENTER);
-
-        pnlHeader.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel2.setText("Item Name");
-
-        jLabel3.setText("Qty");
-
-        jLabel4.setText("Price");
-
-        jLabel5.setText("Amount");
-
-        jLabel1.setText("  No.");
-
-        jLabel8.setText("T");
-
-        javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
-        pnlHeader.setLayout(pnlHeaderLayout);
-        pnlHeaderLayout.setHorizontalGroup(
-            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(42, 42, 42)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(jLabel5)
-                .addGap(37, 37, 37))
-        );
-        pnlHeaderLayout.setVerticalGroup(
-            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(1, 1, 1))
-        );
-
-        jPanel2.add(pnlHeader, java.awt.BorderLayout.NORTH);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(204, 204, 204)));
@@ -208,11 +148,6 @@ public class CustomerBill extends javax.swing.JFrame {
             }
         });
 
-        tfRecivedAmt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfRecivedAmtActionPerformed(evt);
-            }
-        });
         tfRecivedAmt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfRecivedAmtKeyTyped(evt);
@@ -256,17 +191,17 @@ public class CustomerBill extends javax.swing.JFrame {
                 .addComponent(btnNewBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAdd)
-                .addGap(25, 25, 25)
+                .addGap(11, 11, 11)
                 .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(btnDone)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfRecivedAmt, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTotalName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(lblTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -296,31 +231,33 @@ public class CustomerBill extends javax.swing.JFrame {
 
         pnlHeader1.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblHeader.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
+        lblHeader.setFont(new java.awt.Font("Miriam", 3, 18)); // NOI18N
         lblHeader.setText("Dummy Project for ValueLabs ");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel9.setText("Hitech City, Madapur, Hyderabad");
+        jLabel9.setText("Hitech City, Madapur, Hyderabad,  Mobile - 9949493340");
 
         javax.swing.GroupLayout pnlHeader1Layout = new javax.swing.GroupLayout(pnlHeader1);
         pnlHeader1.setLayout(pnlHeader1Layout);
         pnlHeader1Layout.setHorizontalGroup(
             pnlHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHeader1Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(lblHeader)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(pnlHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlHeader1Layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(lblHeader))
+                    .addGroup(pnlHeader1Layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(jLabel9)))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         pnlHeader1Layout.setVerticalGroup(
             pnlHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeader1Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addGroup(pnlHeader1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9))
-                .addGap(2, 2, 2))
+                .addComponent(lblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(2, 2, 2)
+                .addComponent(jLabel9))
         );
 
         jPanel4.add(pnlHeader1, java.awt.BorderLayout.NORTH);
@@ -401,7 +338,7 @@ public class CustomerBill extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-        new PrintMultipleTables(lstOfTableInfo, billDetails);        
+        PrintMultipleTables printMultipleTables = new PrintMultipleTables(lstOfTableInfo, billDetails);
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void setDataInDB() {
@@ -418,64 +355,17 @@ public class CustomerBill extends javax.swing.JFrame {
 //                JOptionPane.showMessageDialog(this, "Please Enter Recived Amount", "Recived Amount Can't be blank", JOptionPane.INFORMATION_MESSAGE);
 //                return;
 //            }
-            lstOfTableInfo = new ArrayList<>();
-            for (int i = 0; i < pnlParent.getComponentCount(); i++) {
-                if (((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && ((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty() && 
-                        ((AddRow) pnlParent.getComponent(i)).tfName.getText().isEmpty()) {
-                    continue;
-                }   
-                BillDetails tableInfo = new BillDetails();
-                if (!((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && !((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty() &&
-                        !((AddRow) pnlParent.getComponent(i)).tfName.getText().isEmpty()) {
-                    tableInfo.setQuantity(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfQuantity.getText()));
-                    tableInfo.setRate(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfPrice.getText()));
-                    tableInfo.setItemName(((AddRow) pnlParent.getComponent(i)).tfName.getText()); 
-                    tableInfo.setNo(Integer.valueOf(((AddRow) pnlParent.getComponent(i)).tfNo.getText().trim()));
-                    tableInfo.setBillNumber(Integer.valueOf(lblCustomerBno.getText()));                
-                    tableInfo.setItemType(((AddRow) pnlParent.getComponent(i)).tfType.getText());
-                    tableInfo.setAmount(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfAmount.getText()));
-                    lstOfTableInfo.add(tableInfo);
-                    continue;
-                }                
-                if (!((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty()) {
-                    tableInfo.setQuantity(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfQuantity.getText()));
-                } else {
-                    JOptionPane.showMessageDialog(this, "Please Enter Quantity", "Quantity can't be blank"+ i+1, JOptionPane.INFORMATION_MESSAGE);
-                    return;
-                }
-                if(!((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty()) {
-                    tableInfo.setRate(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfPrice.getText()));
-                } else {
-                    JOptionPane.showMessageDialog(this, "Please Enter Price", "Price can't be blank"+ i+1, JOptionPane.INFORMATION_MESSAGE);
-                    return;
-                }                 
-                if(!((AddRow) pnlParent.getComponent(i)).tfName.getText().isEmpty()) {
-                    tableInfo.setItemName(((AddRow) pnlParent.getComponent(i)).tfName.getText());
-                } else {
-                    JOptionPane.showMessageDialog(this, "Please Enter Item name", "Item Name can't be blank"+ i+1, JOptionPane.INFORMATION_MESSAGE);
-                    return;
-                }
-            }
+            setItemInfo();
             if (lstOfTableInfo.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please Enter Item Details", "Item Details Can't be blank", JOptionPane.INFORMATION_MESSAGE);
                 return;
-            }            
-            billDetails = new BillMain();
-            billDetails.setBillNo(Integer.valueOf(lblCustomerBno.getText()));
-            billDetails.setBillDate(lblDate.getText());
-            billDetails.setName(tfName.getText());
-            billDetails.setMobileNumber(tfMobileNum.getText());
-            billDetails.setTotalAmt(Float.valueOf(lblTotalAmount.getText()));            
-            billDetails.setCreatedBy(lstUserDetails.get(0));
-            billDetails.setReceivedAmt(Float.valueOf(tfRecivedAmt.getText().isEmpty() ? "0" : tfRecivedAmt.getText()));            
+            }
+            setBillInfo();
             CustomerDataFactory.setBillItems(lstOfTableInfo);
             CustomerDataFactory.setBillDetails(billDetails);
-            CustomerDataFactory.addTransction(lblDate.getText(),lblCustomerBno.getText()+", "+ tfName.getText(), Float.valueOf(tfRecivedAmt.getText().isEmpty() ? "0" : tfRecivedAmt.getText()));            
-            btnPrint.setEnabled(true);
+            CustomerDataFactory.addTransction(lblDate.getText(), lblCustomerBno.getText() + ", " + tfName.getText(), Float.valueOf(tfRecivedAmt.getText().isEmpty() ? "0" : tfRecivedAmt.getText()));            
             JOptionPane.showMessageDialog(this, "Bill Successfully Inserted in DB", "Bill Inserted Successfully", JOptionPane.INFORMATION_MESSAGE);
-            btnDone.setEnabled(false);
-            btnAdd.setEnabled(false);            
-            btnNewBill.setEnabled(true);
+            resetButtons();
         } catch (HeadlessException | NumberFormatException | ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }
@@ -484,43 +374,12 @@ public class CustomerBill extends javax.swing.JFrame {
         addDetails(pnlParent.getComponentCount() + 1, 1);
         setWidth();
     }//GEN-LAST:event_btnAddActionPerformed
-    private void removeDetails() {
-        if(pnlParent.getComponentCount() > defaultRowCount) {
-            for (int iCount = pnlParent.getComponentCount() - 1; iCount >= defaultRowCount; iCount--) {
-                AddRow row = ((AddRow) pnlParent.getComponent(iCount));
-                if (row.tfName.getText().equals("") && row.tfQuantity.getText().equals("") && row.tfPrice.getText().equals("")) {
-                    pnlParent.remove(iCount);
-                }
-            }
-            if (pnlParent.getComponentCount() == 0) {
-                AddRow row = new AddRow();
-                pnlParent.add(row);
-            }
-            for (int i = 0; i < pnlParent.getComponentCount(); i++) {
-                AddRow row = ((AddRow) pnlParent.getComponent(i));
-                row.tfNo.setText(" " + (i + 1) + " ");
-            }
-            int iHeight = defaultRowCount * 19 + 6;
-            pnlParent.setPreferredSize(new Dimension(654, pnlParent.getHeight() - iHeight));
-            pnlParent.setMaximumSize(new Dimension(654, pnlParent.getHeight() - iHeight));
-            this.setSize(this.getWidth(), this.getHeight() - iHeight);
-        }
-    }
-    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-        System.out.println(this.getWidth()+",   "+this.getHeight());
-    }//GEN-LAST:event_formComponentResized
 
     private void tfMobileNumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfMobileNumKeyTyped
-
         if (!((evt.getKeyChar() >= '0' && evt.getKeyChar() <= '9') || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE) || tfMobileNum.getText().length() == 10) {
             evt.consume();
         }
-
     }//GEN-LAST:event_tfMobileNumKeyTyped
-
-    private void tfRecivedAmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfRecivedAmtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfRecivedAmtActionPerformed
 
     private void btnDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneActionPerformed
         setDataInDB();
@@ -544,107 +403,38 @@ public class CustomerBill extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tfRecivedAmtKeyTyped
 
-    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
-        
-    }//GEN-LAST:event_formWindowStateChanged
-
     private void addDetails(int iComp, int add) {
         for (int i = iComp; i < iComp + add; i++) {
-            final AddRow row = new AddRow();
-            row.tfNo.setValue(i);            
-             pnlParent.add(row);
-            row.tfQuantity.addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyReleased(KeyEvent e) {
-                    float f = 0.0f;
-                    if (!row.tfPrice.getText().equals("") && !row.tfQuantity.getText().equals("") && !row.tfQuantity.getText().equals(".")) {
-                        f = Float.valueOf(row.tfQuantity.getText()) * Float.valueOf(row.tfPrice.getText());                       
-                    } 
-                    row.tfAmount.setText(f + "");
-                    float fTotalAmountValue = 0.0f;
-                    for (int i = 0; i < pnlParent.getComponentCount(); i++) {
-                        String text = ((AddRow) pnlParent.getComponent(i)).tfAmount.getText();
-                        if (!text.isEmpty()) {
-                            fTotalAmountValue += Float.valueOf(text);
-                        }
-                    }
-                    lblTotalAmount.setText(fTotalAmountValue + "");
-                }
-
-                @Override
-                public void keyTyped(KeyEvent e) {                    
-                    if ((Character.isDigit(e.getKeyChar()) || e.getKeyChar() == '.' || e.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-                        if (e.getKeyChar() == '.') {
-                            String text = row.tfQuantity.getText();
-                            int indexOf = text.indexOf('.', 0);
-                            if (indexOf != -1) {
-                                e.consume();
-                            }
-                        }
-                    } else {
-                        e.consume();
-                    }
-                }
-            });
-
-            row.tfPrice.addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyReleased(KeyEvent e) {
-                    float f = 0.0f;
-                    if (!row.tfQuantity.getText().equals("") && !row.tfPrice.getText().equals("") && !row.tfPrice.getText().equals(".")) {
-                        f = Float.valueOf(row.tfQuantity.getText()) * Float.valueOf(row.tfPrice.getText());
-                        row.tfAmount.setText(f + "");
-                    } else {
-                        row.tfAmount.setText(f + "");
-                    }
-                    float fTotalAmountValue = 0.0f;
-                    for (int i = 0; i < pnlParent.getComponentCount(); i++) {
-                        String text = ((AddRow) pnlParent.getComponent(i)).tfAmount.getText();
-                        if (!text.isEmpty()) {
-                            fTotalAmountValue += Float.valueOf(text);
-                        }
-                    }
-                    lblTotalAmount.setText(fTotalAmountValue + "");
-                }
-
-                @Override
-                public void keyTyped(KeyEvent e) {
-                    if ((Character.isDigit(e.getKeyChar()) || e.getKeyChar() == '.' || e.getKeyChar() == KeyEvent.VK_BACK_SPACE)) {
-                        if (e.getKeyChar() == '.') {
-                            String text = row.tfPrice.getText();
-                            int indexOf = text.indexOf('.', 0);
-                            if (indexOf != -1) {
-                                e.consume();
-                            }
-                        }
-                    } else {
-                        e.consume();
-                    }
-                }
-            });
+            AddRow row = new AddRow(this);
+            row.tfNo.setValue(i);
+            pnlParent.add(row);
         }
-        
+    }
+
+    public void setTotalAmount() {
+        float fTotalAmountValue = 0.0f;
+        for (int i = 1; i < pnlParent.getComponentCount(); i++) {
+            String text = ((AddRow) pnlParent.getComponent(i)).tfAmount.getText();
+            if (!text.isEmpty()) {
+                fTotalAmountValue += Float.valueOf(text);
+            }
+        }
+        lblTotalAmount.setText(fTotalAmountValue + "");
     }
 
     public void setWidth() {
-        this.setSize(this.getWidth(), this.getHeight() + 16 + defaultRowCount - 6);        
+        this.setSize(this.getWidth(), this.getHeight() + 16 + defaultRowCount - 6);
     }
-
 
     private class MyDispatcher implements KeyEventDispatcher {
 
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
-            if (e.getID() == KeyEvent.KEY_PRESSED) {
-
-            } else if (e.getID() == KeyEvent.KEY_RELEASED) {
+            if (e.getID() == KeyEvent.KEY_RELEASED) {
                 if (e.getKeyCode() == KeyEvent.VK_F1) {
                     int iComp = pnlParent.getComponentCount();
                     addDetails(iComp + 1, 1);
                     setWidth();
-                }
-                if (e.getKeyCode() == KeyEvent.VK_F2) {
-                    removeDetails();
                 }
                 if (e.getKeyCode() == KeyEvent.VK_F3) {
                     PrintUtilities.printComponent(pnlAll);
@@ -652,11 +442,68 @@ public class CustomerBill extends javax.swing.JFrame {
                 if (e.getKeyCode() == KeyEvent.VK_F4) {
                     setDataInDB();
                 }
-            } else if (e.getID() == KeyEvent.KEY_TYPED) {
-
             }
             return false;
         }
+    }
+    
+    private void setBillInfo() {
+        billDetails = new BillMain();
+        billDetails.setBillNo(Integer.valueOf(lblCustomerBno.getText()));
+        billDetails.setBillDate(lblDate.getText());
+        billDetails.setName(tfName.getText());
+        billDetails.setMobileNumber(tfMobileNum.getText());
+        billDetails.setTotalAmt(Float.valueOf(lblTotalAmount.getText()));
+        billDetails.setCreatedBy(lstUserDetails.get(0));
+        billDetails.setReceivedAmt(Float.valueOf(tfRecivedAmt.getText().isEmpty() ? "0" : tfRecivedAmt.getText()));
+    }
+
+    private void setItemInfo() {
+        lstOfTableInfo = new ArrayList<>();
+        for (int i = 1; i < pnlParent.getComponentCount(); i++) {
+            if (((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && ((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty()
+                    && ((AddRow) pnlParent.getComponent(i)).tfName.getText().isEmpty()) {
+                continue;
+            }
+            BillDetails tableInfo = new BillDetails();
+            if (!((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty() && !((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty()
+                    && !((AddRow) pnlParent.getComponent(i)).tfName.getText().isEmpty()) {
+                tableInfo.setQuantity(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfQuantity.getText()));
+                tableInfo.setRate(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfPrice.getText()));
+                tableInfo.setItemName(((AddRow) pnlParent.getComponent(i)).tfName.getText());
+                tableInfo.setNo(Integer.valueOf(((AddRow) pnlParent.getComponent(i)).tfNo.getText().trim()));
+                tableInfo.setBillNumber(Integer.valueOf(lblCustomerBno.getText()));
+                tableInfo.setItemType(((AddRow) pnlParent.getComponent(i)).tfType.getText());
+                tableInfo.setAmount(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfAmount.getText()));
+                lstOfTableInfo.add(tableInfo);
+                continue;
+            }
+            if (!((AddRow) pnlParent.getComponent(i)).tfQuantity.getText().isEmpty()) {
+                tableInfo.setQuantity(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfQuantity.getText()));
+            } else {
+                JOptionPane.showMessageDialog(this, "Please Enter Quantity", "Quantity can't be blank" + i + 1, JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            if (!((AddRow) pnlParent.getComponent(i)).tfPrice.getText().isEmpty()) {
+                tableInfo.setRate(Float.parseFloat(((AddRow) pnlParent.getComponent(i)).tfPrice.getText()));
+            } else {
+                JOptionPane.showMessageDialog(this, "Please Enter Price", "Price can't be blank" + i + 1, JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            if (!((AddRow) pnlParent.getComponent(i)).tfName.getText().isEmpty()) {
+                tableInfo.setItemName(((AddRow) pnlParent.getComponent(i)).tfName.getText());
+            } else {
+                JOptionPane.showMessageDialog(this, "Please Enter Item name", "Item Name can't be blank" + i + 1, JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+        }
+    }
+    
+    private void resetButtons() {
+        btnPrint.setEnabled(true);
+        btnDone.setEnabled(false);
+        btnAdd.setEnabled(false);
+        btnNewBill.setEnabled(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -664,14 +511,8 @@ public class CustomerBill extends javax.swing.JFrame {
     private javax.swing.JButton btnDone;
     private javax.swing.JButton btnNewBill;
     private javax.swing.JButton btnPrint;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -682,11 +523,10 @@ public class CustomerBill extends javax.swing.JFrame {
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblHeader;
     private javax.swing.JLabel lblName;
-    private javax.swing.JLabel lblTotalAmount;
+    public javax.swing.JLabel lblTotalAmount;
     private javax.swing.JLabel lblTotalName;
     private javax.swing.JPanel pnlAll;
     private javax.swing.JPanel pnlDetails;
-    private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlHeader1;
     private javax.swing.JPanel pnlParent;
     private javax.swing.JTextField tfMobileNum;
@@ -695,4 +535,3 @@ public class CustomerBill extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 }
-

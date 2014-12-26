@@ -7,8 +7,7 @@ package com.ms.view;
 
 import java.awt.Font;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 /**
@@ -43,6 +42,8 @@ public class MainForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Customer Information");
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        setResizable(false);
 
         jButton1.setText("Customer Bill");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -103,12 +104,12 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jButton5)
                 .addGap(5, 5, 5)
                 .addComponent(jButton6)
-                .addContainerGap())
+                .addContainerGap(529, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
@@ -116,7 +117,7 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jButton4)
                     .addComponent(jButton5)
                     .addComponent(jButton6))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(4, 4, 4))
         );
 
         pack();
@@ -127,9 +128,8 @@ public class MainForm extends javax.swing.JFrame {
             CustomerBill bill = new CustomerBill();
             bill.setVisible(true);
         } catch (SQLException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

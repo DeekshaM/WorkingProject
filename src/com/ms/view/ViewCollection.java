@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 
 /**
  *
@@ -79,14 +80,14 @@ public class ViewCollection extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane1))
         );
 
         pack();
@@ -101,6 +102,9 @@ public class ViewCollection extends javax.swing.JFrame {
             List<Collection> lstCollection = CustomerDataFactory.getCollectionDetails(jXDatePicker.getDate());            
             CollectionViewTableModel collectionModel = new CollectionViewTableModel(lstCollection);
             tblCollection.setModel(collectionModel);
+            tblCollection.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            tblCollection.getColumnModel().getColumn(0).setPreferredWidth(300);
+            tblCollection.getColumnModel().getColumn(1).setPreferredWidth(80);
             tblCollection.setDefaultRenderer(Object.class, new BillDetailsTableRenderer());
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ViewCollection.class.getName()).log(Level.SEVERE, null, ex);
