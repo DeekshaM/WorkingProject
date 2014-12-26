@@ -33,57 +33,57 @@ public class MainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btncustomerBill = new javax.swing.JButton();
+        btnSearchItemDetails = new javax.swing.JButton();
+        btnviewBills = new javax.swing.JButton();
+        btnAddNewItem = new javax.swing.JButton();
+        btnAddCollection = new javax.swing.JButton();
+        btnViewCollection = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Customer Information");
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setResizable(false);
 
-        jButton1.setText("Customer Bill");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btncustomerBill.setText("Customer Bill");
+        btncustomerBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btncustomerBillActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Search Item Details");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSearchItemDetails.setText("Search Item Details");
+        btnSearchItemDetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSearchItemDetailsActionPerformed(evt);
             }
         });
 
-        jButton3.setText("View Bills");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnviewBills.setText("View Bills");
+        btnviewBills.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnviewBillsActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Add New Item");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnAddNewItem.setText("Add New Item");
+        btnAddNewItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnAddNewItemActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Add Collection");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnAddCollection.setText("Add Collection");
+        btnAddCollection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnAddCollectionActionPerformed(evt);
             }
         });
 
-        jButton6.setText("View Collection");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnViewCollection.setText("View Collection");
+        btnViewCollection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnViewCollectionActionPerformed(evt);
             }
         });
 
@@ -93,17 +93,17 @@ public class MainForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btncustomerBill)
                 .addGap(5, 5, 5)
-                .addComponent(jButton2)
+                .addComponent(btnSearchItemDetails)
                 .addGap(5, 5, 5)
-                .addComponent(jButton3)
+                .addComponent(btnviewBills)
                 .addGap(5, 5, 5)
-                .addComponent(jButton4)
+                .addComponent(btnAddNewItem)
                 .addGap(5, 5, 5)
-                .addComponent(jButton5)
+                .addComponent(btnAddCollection)
                 .addGap(5, 5, 5)
-                .addComponent(jButton6)
+                .addComponent(btnViewCollection)
                 .addContainerGap(529, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -111,19 +111,19 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(btncustomerBill)
+                    .addComponent(btnSearchItemDetails)
+                    .addComponent(btnviewBills)
+                    .addComponent(btnAddNewItem)
+                    .addComponent(btnAddCollection)
+                    .addComponent(btnViewCollection))
                 .addGap(4, 4, 4))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btncustomerBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncustomerBillActionPerformed
         try {
             CustomerBill bill = new CustomerBill();
             bill.setVisible(true);
@@ -131,32 +131,32 @@ public class MainForm extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btncustomerBillActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSearchItemDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchItemDetailsActionPerformed
         SearchItemDetails searchItem = new SearchItemDetails();
         searchItem.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSearchItemDetailsActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnviewBillsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviewBillsActionPerformed
         ViewBill viewBill = new ViewBill();
         viewBill.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnviewBillsActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnAddNewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewItemActionPerformed
         ItemDetailsForm itemEntry = new ItemDetailsForm();
         itemEntry.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnAddNewItemActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnAddCollectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCollectionActionPerformed
        CollectionEntry collection = new CollectionEntry();
        collection.setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnAddCollectionActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnViewCollectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewCollectionActionPerformed
         ViewCollection viewCollection = new ViewCollection();
         viewCollection.setVisible(true);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnViewCollectionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,11 +201,11 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton btnAddCollection;
+    private javax.swing.JButton btnAddNewItem;
+    private javax.swing.JButton btnSearchItemDetails;
+    private javax.swing.JButton btnViewCollection;
+    private javax.swing.JButton btncustomerBill;
+    private javax.swing.JButton btnviewBills;
     // End of variables declaration//GEN-END:variables
 }
