@@ -141,6 +141,7 @@ public class ViewBill extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(null);
 
+        tblBills.setAutoCreateRowSorter(true);
         tblBills.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -185,8 +186,6 @@ public class ViewBill extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Bill Date:");
-
-        lblTotalAmt.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Total Amount:");
